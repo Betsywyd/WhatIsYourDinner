@@ -15,5 +15,11 @@ namespace WhatIsForDinnerBackEnd.Controllers
         {
             return spoonacularDAL.GetRecipe(id);
         }
+
+        [HttpGet("Ingredient/{id}")]
+        public Ingredient GetIngredientById(int id)
+        {
+            return spoonacularDAL.GetIngredient(id);
+        }
     }
 }

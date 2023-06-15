@@ -15,5 +15,17 @@ namespace WhatIsForDinnerBackEnd.Models
 
             return r;   
         }
+
+        public Ingredient GetIngredient(int id)
+        {
+
+            RestClient rc = new RestClient($"https://api.spoonacular.com/food/ingredients/{id}/information?amount=1");
+            RestRequest rr = new RestRequest();
+            rr.AddQueryParameter("apiKey", Secret.ApiKey);
+            Task<Ingredient> ingredient = rc.GetAsync<Ingredient>(rr);
+            Ingredient i = ingredient.Result;
+
+            return i;
+        }
     }
 }
