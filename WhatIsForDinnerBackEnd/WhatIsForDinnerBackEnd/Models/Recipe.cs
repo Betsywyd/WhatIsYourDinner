@@ -16,17 +16,17 @@ public class Result
     public Nutrition nutrition { get; set; }
 }
 
-public class Nutrition
-{
-    public Nutrient[] nutrients { get; set; }
-}
+//public class Nutrition
+//{
+//    public Nutrient[] nutrients { get; set; }
+//}
 
-public class Nutrient
-{
-    public string name { get; set; }
-    public float amount { get; set; }
-    public string unit { get; set; }
-}
+//public class Nutrient
+//{
+//    public string name { get; set; }
+//    public float amount { get; set; }
+//    public string unit { get; set; }
+//}
 public class Recipe
 {
     public bool vegetarian { get; set; }
