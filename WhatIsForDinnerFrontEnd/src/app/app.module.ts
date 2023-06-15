@@ -8,11 +8,13 @@ import { Route, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { CreateAccountComponent } from './create-account/create-account.component';
+import { RecipeComponent } from './recipe/recipe.component';
 
 const routes : Route[] = [
   {path:'createAccount', component:CreateAccountComponent},
   {path:'login', component:AccountComponent},
-  {path:'favorites',component:FavoriteComponent}
+  {path:'favorites',component:FavoriteComponent},
+  {path:'recipes',component:RecipeComponent}
  
 ];
 
@@ -21,7 +23,8 @@ const routes : Route[] = [
     AppComponent,
     AccountComponent,
     FavoriteComponent,
-    CreateAccountComponent
+    CreateAccountComponent,
+    RecipeComponent
   ],
   imports: [
     BrowserModule,
