@@ -1,0 +1,17 @@
+
+<div  *ngIf="!welcome">
+<p>Name:</p>
+<input type="text" [(ngModel)]="logInAccount.name">
+<p>Email:</p>
+<input type="text" [(ngModel)]="logInAccount.email">
+<p>Password</p>
+<input type="text" [(ngModel)]="logInAccount.password">
+<button (click)="logIn()">Log In</button>
+
+<h3 *ngIf="checkExist">This account isn't exist</h3>
+</div>
+<div *ngIf="welcome">
+<h3 >Welcome {{logInAccount.name}} <button (click)="logOut()">Log Out</button></h3>
+
+</div>
+
