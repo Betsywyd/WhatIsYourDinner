@@ -92,3 +92,29 @@ export class Convert {
     }
 }
 
+// To parse this data:
+//
+//   import { Convert, RecipeSearchResult } from "./file";
+//
+//   const recipeSearchResult = Convert.toRecipeSearchResult(json);
+
+export interface RecipeSearchResult {
+    results:      Result[];
+    offset:       number;
+    number:       number;
+    totalResults: number;
+}
+
+export interface Result {
+    id:        number;
+    title:     string;
+    image:     string;
+    imageType: ImageType;
+    nutrition: null;
+}
+
+export enum ImageType {
+    Jpg = "jpg",
+}
+
+
