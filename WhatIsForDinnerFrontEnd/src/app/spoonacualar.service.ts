@@ -21,8 +21,8 @@ export class SpoonacualarService {
     return this.http.get<Ingredient>(this.url + "/Ingredient/" + id)
   }
    
-  getAllRecipe():Observable<any>{
-    return this.http.get<RecipeSearchResult>(this.url);
+  searchRecipe(input:string):Observable<RecipeSearchResult>{
+    return this.http.get<RecipeSearchResult>(this.url+"/Search/"+input);
   }
 
 
