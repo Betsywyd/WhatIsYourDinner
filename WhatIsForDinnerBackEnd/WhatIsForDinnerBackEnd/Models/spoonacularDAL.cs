@@ -29,12 +29,6 @@ namespace WhatIsForDinnerBackEnd.Models
             return response.Result;
         }
 
-
-
-
-
-
-
         public Ingredient GetIngredient(int id)
         {
 
