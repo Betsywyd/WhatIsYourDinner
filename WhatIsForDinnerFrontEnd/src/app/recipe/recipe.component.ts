@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SpoonacualarService } from '../spoonacualar.service';
-import { Recipe, Result } from '../recipe';
+import { Recipe, RecipeSearchResult, Result } from '../recipe';
 
 @Component({
   selector: 'app-recipe',
@@ -9,21 +9,28 @@ import { Recipe, Result } from '../recipe';
 })
 export class RecipeComponent implements OnInit{
 results:Result[]=[];
-
-
+input:string="";
 
 constructor(private spoonacualarService:SpoonacualarService){}
-  ngOnInit(): void {
-    this.spoonacualarService.getAllRecipe().subscribe(
-      (result)=>{
-        this.results=result.Result;
-      }
-    )
+  ngOnInit(): void {}
+    
+    getRecipe():void{
+      this.spoonacualarService.searchRecipe(this.input).subscribe(
+        (result:RecipeSearchResult)=>{
+          this.results=result.results;
+          console.log(result);
+        }
+      );
+  
+    }
+
+    addToFavorites(){
+      
+
+
+
+    }
 
   
 
-
-
-  
-}
 }

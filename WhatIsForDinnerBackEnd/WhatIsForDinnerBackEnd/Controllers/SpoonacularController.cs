@@ -17,10 +17,10 @@ namespace WhatIsForDinnerBackEnd.Controllers
         }
 
 
-        [HttpGet]
-        public RecipeSearchResult GetRecipe() 
+        [HttpGet("Search/{input}")]
+        public RecipeSearchResult GetRecipe(string input) 
         {
-            return spoonacularDAL.GetRecipeResult();
+            return spoonacularDAL.GetRecipeResult(input);
 
         }
 

@@ -17,10 +17,10 @@ namespace WhatIsForDinnerBackEnd.Models
         }
 
 
-        public RecipeSearchResult GetRecipeResult()
+        public RecipeSearchResult GetRecipeResult(string input)
         {
 
-            RestClient client = new RestClient($"https://api.spoonacular.com/recipes/complexSearch");
+            RestClient client = new RestClient($"https://api.spoonacular.com/recipes/complexSearch?query={input}");
             RestRequest request = new RestRequest();
             request.AddQueryParameter("apiKey", Secret.ApiKey);
             Task<RecipeSearchResult> response = client.GetAsync<RecipeSearchResult>(request);
