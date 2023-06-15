@@ -1,4 +1,6 @@
 ﻿
+using System.Diagnostics;
+
 public class RecipeSearchResult
 {
     public Result[] results { get; set; }
@@ -63,7 +65,7 @@ public class Recipe
     public object[] occasions { get; set; }
     public Winepairing winePairing { get; set; }
     public string instructions { get; set; }
-    public object[] analyzedInstructions { get; set; }
+    public AnalizedInstructions[] analyzedInstructions { get; set; }
     public object originalId { get; set; }
     public string spoonacularSourceUrl { get; set; }
 }
@@ -109,4 +111,16 @@ public class Metric
     public float amount { get; set; }
     public string unitShort { get; set; }
     public string unitLong { get; set; }
+}
+
+public class AnalizedInstructions
+{
+    public string name { get; set; }
+    public Step[] steps { get; set; }
+}
+
+public class Step
+{
+    public int number { get; set; }
+    public string step { get; set; }
 }
