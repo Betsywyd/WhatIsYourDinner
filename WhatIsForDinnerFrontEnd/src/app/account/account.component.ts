@@ -14,7 +14,7 @@ export class AccountComponent implements OnInit{
   checkExist:boolean=false;
   logedIn:boolean=false;
   welcome:boolean=false;
-  // checkOut:boolean=true;
+ 
 
 constructor(private accountService:AccountService){}
   
@@ -23,6 +23,7 @@ constructor(private accountService:AccountService){}
     this.accountService.getAllAccounts().subscribe(
       (result)=>{
         this.accountList = result;
+       
       }
     );
   }
@@ -46,7 +47,7 @@ logIn(){
     this.accountService.currentAccountLogedIn=true;
     this.checkExist=false;
     this.welcome=true;
-    // this.checkOut=false;
+  
     console.log(this.accountService.currentAccountLogedIn)
   }
   else{
@@ -58,8 +59,11 @@ logOut(){
   this.accountService.currentAccountLogedIn=false;
   this.checkExist=false;
   this.welcome=false;
-  // this.checkOut=false;
+  this.logInAccount={} as Account;
+
 }
+
+
 
 }
 

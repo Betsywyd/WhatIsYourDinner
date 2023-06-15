@@ -1,8 +1,9 @@
-
+<div *ngIf="!checkLogIn()">
 <h2>What's for dinner!</h2>
 
 <a routerLink="createAccount">Create an account</a><br><br>
 <a routerLink="login">LogIn</a><br><br>
+</div>
 <div *ngIf="checkLogIn()">
 <a routerLink="favorites">Favorites</a>
 </div>
