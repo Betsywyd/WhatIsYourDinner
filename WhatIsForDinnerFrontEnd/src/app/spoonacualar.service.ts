@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { ExtendedIngredient, Recipe, RecipeSearchResult, Result } from './recipe';
+import {  AnalyzedInstructions, ExtendedIngredient, Recipe, RecipeSearchResult, Result } from './recipe';
 import { Ingredient } from './ingredient';
 import { Observable } from 'rxjs';
 @Injectable({
@@ -27,6 +27,10 @@ export class SpoonacualarService {
 
   GetExtendedingredients(recipeId:number):Observable<any>{
     return this.http.get<ExtendedIngredient[]>(this.url+"/Getingredients/"+recipeId)
+  }
+
+  GetAnalizedInstructions(recipeId:number):Observable<any>{
+    return this.http.get<AnalyzedInstructions[]>(this.url+"/Getingredients/"+recipeId)
   }
 
 }

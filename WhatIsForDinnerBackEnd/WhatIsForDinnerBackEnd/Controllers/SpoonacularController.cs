@@ -24,6 +24,7 @@ namespace WhatIsForDinnerBackEnd.Controllers
 
         }
 
+
         [HttpGet("Getingredients/{recipeId}")]
         public Extendedingredient[] GetExtendedingredients(int recipeId)
         {
@@ -32,6 +33,25 @@ namespace WhatIsForDinnerBackEnd.Controllers
         }
 
 
+        [HttpGet("GetAnalizedInstructions/{recipeId}")]
+        public AnalizedInstructions[] GetAnalizedInstructions(int recipeId)
+        {
+            Recipe r = spoonacularDAL.GetRecipe(recipeId);
+            return r.analyzedInstructions;
+        }
+
+        //[HttpGet("GetInstructions/{recipeId}")]
+        //public Step[] GetInstructions(int recipeId)
+        //{
+        //    Recipe r = spoonacularDAL.GetRecipe(recipeId);
+        //    List<AnalizedInstructions> analizedInstructions = r.analyzedInstructions.ToList();
+        //    List<Step> steps = new List<Step>();
+        //    for(int i = 0; i < analizedInstructions.Count; i++)
+        //    {
+        //        steps.Add(analizedInstructions[i].steps);
+        //    }
+
+        //}
 
 
 

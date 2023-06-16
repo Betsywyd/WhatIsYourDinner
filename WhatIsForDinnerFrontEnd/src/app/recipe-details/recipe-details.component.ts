@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ExtendedIngredient, Recipe } from '../recipe';
+import { AnalyzedInstructions, ExtendedIngredient, Recipe, Step } from '../recipe';
 import { SpoonacualarService } from '../spoonacualar.service';
 
 @Component({
@@ -10,6 +10,8 @@ import { SpoonacualarService } from '../spoonacualar.service';
 export class RecipeDetailsComponent implements OnInit{
 
   ingredients:ExtendedIngredient[]=[];
+  // analyzedInstructionsList: AnalyzedInstructions[]=[];
+  // steps:Step[]=[];
 
   constructor(private spoonacualarService:SpoonacualarService){
 
@@ -22,7 +24,23 @@ export class RecipeDetailsComponent implements OnInit{
         console.log(this.displayRecipe.id);
       }
     )
+
+    
   }
+  
+  // getSteps(){
+  //   this.spoonacualarService.GetAnalizedInstructions(this.displayRecipe.id).subscribe(
+  //     (result:AnalyzedInstructions[])=>{
+  //       this.analyzedInstructionsList=result;
+  //       for(let i=0;i<this.analyzedInstructionsList.length;i++){
+
+  //       }
+  //       console.log(result);
+  //     }
+  //   )
+  // }
+
+
 
   @Input() displayRecipe:Recipe={} as Recipe;
 
