@@ -10,6 +10,8 @@ import { Recipe, RecipeSearchResult, Result } from '../recipe';
 export class RecipeComponent implements OnInit{
 results:Result[]=[];
 input:string="";
+selectedRecipe: Recipe={} as Recipe;
+showRecipeDetails:boolean=false;
 
 constructor(private spoonacualarService:SpoonacualarService){}
   ngOnInit(): void {}
@@ -24,9 +26,19 @@ constructor(private spoonacualarService:SpoonacualarService){}
   
     }
 
-    addToFavorites(){
-      
+    getRecipeDetails(id:number){
+      this.spoonacualarService.getRecipe(id).subscribe(
+        (result:Recipe)=>{
+          this.selectedRecipe=result;
+          this.showRecipeDetails=true;
+        }
+      )
+    }
 
+
+    addToFavorites(){
+      // let f:Favorite={}
+     
 
 
     }

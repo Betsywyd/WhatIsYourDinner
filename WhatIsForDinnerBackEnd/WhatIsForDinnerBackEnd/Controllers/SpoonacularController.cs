@@ -24,6 +24,15 @@ namespace WhatIsForDinnerBackEnd.Controllers
 
         }
 
+        [HttpGet("Getingredients/{recipeId}")]
+        public Extendedingredient[] GetExtendedingredients(int recipeId)
+        {
+            Recipe r=spoonacularDAL.GetRecipe(recipeId); 
+            return r.extendedIngredients;
+        }
+
+
+
 
 
 

@@ -1,0 +1,21 @@
+<p>{{displayRecipe.title}}</p>
+<img src={{displayRecipe.image}}>
+<p>vegetarian:{{displayRecipe.vegetarian}}</p>
+<p>glutenFree:{{displayRecipe.glutenFree}}</p>
+<p>dairyFree:{{displayRecipe.dairyFree}}</p>
+<p>preparationMinutes:{{displayRecipe.preparationMinutes}}</p>
+<p>cookingMinutes:{{displayRecipe.cookingMinutes}}</p>
+<p>healthScore:{{displayRecipe.healthScore}}</p>
+
+
+<h3>Ingredients: </h3>
+<div *ngFor="let d of ingredients;index as i">
+<p>{{i+1}}: <span>{{d.name}}</span> ,<span>{{d.amount}} {{d.unit}}</span></p>
+<img src={{d.image}}><br>
+
+<h3>Instructions:</h3>
+
+
+
+
+</div>

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Recipe, RecipeSearchResult, Result } from './recipe';
+import { ExtendedIngredient, Recipe, RecipeSearchResult, Result } from './recipe';
 import { Ingredient } from './ingredient';
 import { Observable } from 'rxjs';
 @Injectable({
@@ -13,11 +13,11 @@ export class SpoonacualarService {
   constructor(private http:HttpClient) { }
   
  
-  getRecipe(id:number){
+  getRecipe(id:number):Observable<Recipe>{
     return this.http.get<Recipe>(this.url + "/Recipe/" + id)
   }
 
-  getIngredient(id:number){
+  getIngredient(id:number):Observable<Ingredient>{
     return this.http.get<Ingredient>(this.url + "/Ingredient/" + id)
   }
    
@@ -25,6 +25,8 @@ export class SpoonacualarService {
     return this.http.get<RecipeSearchResult>(this.url+"/Search/"+input);
   }
 
-
+  GetExtendedingredients(recipeId:number):Observable<any>{
+    return this.http.get<ExtendedIngredient[]>(this.url+"/Getingredients/"+recipeId)
+  }
 
 }

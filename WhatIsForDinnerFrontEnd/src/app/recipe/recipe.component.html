@@ -1,12 +1,15 @@
 
 
-
+<div *ngIf="!showRecipeDetails">
 <p>IngredientName:</p>
 <input type="text" [(ngModel)]="input">
 <button (click)="getRecipe()">SearchTerm</button>
 
-<div *ngFor="let r of results">
-<p>Title:{{r.title}}</p>
+<div *ngFor="let r of results;index as i">
+<p>Title:{{r.title}}</p><button (click)="getRecipeDetails(r.id)">See Details</button>
 <img src={{r.image}}>
-<button (click)="addToFavorites()">Add To Favorite</button>
+<!-- <button (click)="addToFavorites(r.id)">Add To Favorite</button> -->
 </div>
+</div>
+
+<app-recipe-details  *ngIf="showRecipeDetails" [displayRecipe]="selectedRecipe"></app-recipe-details>
