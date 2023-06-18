@@ -15,13 +15,13 @@ public partial class SavedRecipe
 
     public string? IngredientAmount { get; set; }
 
-    public string? Image { get; set; }
-
+    public string? Image { get; set;}
     public int? ReadyInMinutes { get; set; }
 
     public int? Servings { get; set; }
 
     public string? AnalizedInstructions { get; set; }
+    public string? Image { get; set; }
 
     public virtual ICollection<Favorite> Favorites { get; set; } = new List<Favorite>();
 }
