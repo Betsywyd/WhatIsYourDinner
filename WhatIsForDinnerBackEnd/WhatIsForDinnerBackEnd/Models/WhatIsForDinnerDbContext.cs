@@ -65,7 +65,9 @@ public partial class WhatIsForDinnerDbContext : DbContext
                 .IsUnicode(false)
                 .HasColumnName("analizedInstructions");
             entity.Property(e => e.Image)
-                .HasColumnType("image")
+                //.HasColumnType("image")
+                .HasMaxLength(1)
+                .IsUnicode(false)
                 .HasColumnName("image");
             entity.Property(e => e.IngredientAmount)
                 .HasMaxLength(1)

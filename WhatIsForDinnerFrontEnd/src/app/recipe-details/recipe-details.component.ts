@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { AnalyzedInstructions, ExtendedIngredient, Recipe, Step } from '../recipe';
 import { SpoonacualarService } from '../spoonacualar.service';
+import { AccountService } from '../account.service';
 
 @Component({
   selector: 'app-recipe-details',
@@ -13,7 +14,7 @@ export class RecipeDetailsComponent implements OnInit{
   // analyzedInstructionsList: AnalyzedInstructions[]=[];
   // steps:Step[]=[];
 
-  constructor(private spoonacualarService:SpoonacualarService){
+  constructor(private spoonacualarService:SpoonacualarService,private accountService:AccountService){
 
   }
 

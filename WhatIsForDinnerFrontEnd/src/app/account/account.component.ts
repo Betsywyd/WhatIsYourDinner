@@ -20,8 +20,13 @@ constructor(private accountService:AccountService){}
   
 
   ngOnInit(): void {
+    if(this.accountService.currentAccountLogedIn==true){
+      this.logInAccount=this.accountService.currentAccount;
+      this.logedIn=true;
+    }
     this.accountService.getAllAccounts().subscribe(
       (result)=>{
+        console.log(result);
         this.accountList = result;
        
       }
@@ -35,6 +40,7 @@ checkAccount():boolean{
   for(let i=0;i<this.accountList.length;i++)
   {
     if(this.logInAccount.name==this.accountList[i].name&&this.logInAccount.email==this.accountList[i].email&&this.logInAccount.password==this.accountList[i].password){
+      this.accountService.currentAccount=this.accountList[i];
      return true;
     } 
   }
@@ -43,7 +49,7 @@ checkAccount():boolean{
 
 logIn(){
   if(this.checkAccount()==true){
-    this.accountService.currentAccount=this.logInAccount;
+   
     this.accountService.currentAccountLogedIn=true;
     this.checkExist=false;
     this.welcome=true;
