@@ -1,3 +1,4 @@
+using System.Text.Json.Serialization;
 using WhatIsForDinnerBackEnd.Models;
 
 namespace WhatIsForDinnerBackEnd
@@ -15,6 +16,8 @@ namespace WhatIsForDinnerBackEnd
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
             builder.Services.AddDbContext<WhatIsForDinnerDbContext>();
+            builder.Services.AddControllers().AddJsonOptions(x =>
+                x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 
             builder.Services.AddCors(options =>
             {

@@ -7,7 +7,7 @@ public partial class SavedRecipe
 {
     public int Id { get; set; }
 
-    public int? RecipeId { get; set; }
+    public int RecipeId { get; set; }
 
     public string? Title { get; set; }
 
@@ -15,7 +15,7 @@ public partial class SavedRecipe
 
     public string? IngredientAmount { get; set; }
 
-    public byte[]? Image { get; set; }
+    public string? Image { get; set; }
 
     public int? ReadyInMinutes { get; set; }
 

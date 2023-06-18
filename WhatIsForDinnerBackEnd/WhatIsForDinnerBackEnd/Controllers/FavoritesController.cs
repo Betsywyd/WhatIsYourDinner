@@ -31,6 +31,36 @@ namespace WhatIsForDinnerBackEnd.Controllers
             return await _context.Favorites.ToListAsync();
         }
 
+
+        //Get Favorites by account's id(added by hand)
+
+        //[HttpGet("Account/{accountId}")]
+        //public async Task<ActionResult<IEnumerable<Favorite>>> GetAccountFav(int accountId)
+        //{
+        //    if (_context.Favorites == null)
+        //    {
+        //        return NotFound();
+        //    }
+
+
+        //    return await _context.Accounts.Find(accountId).Favorites.ToListAsync();
+        //}
+
+
+        //Get Favorites by account's id(added by hand)
+
+        [HttpGet("AccountFav/{accountId}")]
+        public List<SavedRecipe> GetAccountFav(int accountId)
+        {
+            List<Favorite> favoritesList = _context.Favorites.ToList();
+            List<Favorite> accountFav = favoritesList.Where(f=>f.AccountId == accountId).ToList();
+            List<int> recipeId= accountFav.Select(f => f.RecipeId!).ToList();
+            List<SavedRecipe> favoritesRecipe= _context.SavedRecipes.Where(r=>recipeId.Contains(r.RecipeId!)).ToList();
+
+            
+            return favoritesRecipe;    
+        }
+
         // GET: api/Favorites/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Favorite>> GetFavorite(int id)
@@ -89,6 +119,8 @@ namespace WhatIsForDinnerBackEnd.Controllers
           {
               return Problem("Entity set 'WhatIsForDinnerDbContext.Favorites'  is null.");
           }
+          favorite.Id =null;
+
             _context.Favorites.Add(favorite);
             await _context.SaveChangesAsync();
 
