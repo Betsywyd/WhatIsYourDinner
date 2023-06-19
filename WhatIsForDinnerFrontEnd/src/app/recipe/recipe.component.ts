@@ -5,6 +5,7 @@ import { AccountService } from '../account.service';
 import { FavoritesService } from '../favorites.service';
 import { Favorite } from '../favorite';
 import { SavedRecipe } from '../saved-recipe';
+import { Account } from '../account';
 
 @Component({
   selector: 'app-recipe',
@@ -12,17 +13,21 @@ import { SavedRecipe } from '../saved-recipe';
   styleUrls: ['./recipe.component.css']
 })
 export class RecipeComponent implements OnInit{
+welcome:boolean=true;
 results:Result[]=[];
 input:string="";
 selectedRecipe: Recipe={} as Recipe;
 showRecipeDetails:boolean=false;
 // favRecipe:Recipe={} as Recipe;
 accountFavorites:Favorite[]=[];
+account:Account={} as Account;
 
 
 
 constructor(private spoonacualarService:SpoonacualarService,private accountService:AccountService,private favoriteService:FavoritesService){}
   ngOnInit(): void {
+    this.welcome=this.accountService.currentAccountLogedIn;
+    this.account=this.accountService.currentAccount;
     console.log(this.accountService.currentAccount);
   // this.favoriteService.getFavoritesByAccountId(this.accountService.currentAccount.id).subscribe(
   //   (result)=>{
@@ -53,6 +58,15 @@ constructor(private spoonacualarService:SpoonacualarService,private accountServi
     }
 
 
+      logOut(){
+        this.accountService.currentAccountLogedIn=false;
+        this.welcome=false;
+      }
+      getCurrentAccountName():string{
+       return this.accountService.currentAccount.name;
+       console.log(this.accountService.currentAccount.name)
+      }
+
     // addToFavorites(recipeId:number){
     //   let newFavorite:Favorite ={id:0,accountId:this.accountService.currentAccount.id,recipeId:recipeId, account:null};
     //  this.favoriteService.addFavorite(newFavorite).subscribe(
@@ -64,6 +78,9 @@ constructor(private spoonacualarService:SpoonacualarService,private accountServi
 
     // }
 
+    backRecipe(){
+      this.showRecipeDetails=false;
+    }
   
 
 }

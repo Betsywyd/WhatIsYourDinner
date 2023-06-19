@@ -1,3 +1,6 @@
+<div *ngIf="welcome">
+<h3 >Welcome {{getCurrentAccountName()}} <button (click)="logOut()">Log Out</button></h3>
+
 
 
 <div *ngIf="!showRecipeDetails">
@@ -11,5 +14,6 @@
 <!-- <button (click)="addToFavorites(r.id)">Add To Favorite</button> -->
 </div>
 </div>
-
+<button *ngIf="showRecipeDetails"  (click)="backRecipe()">Get Back Recipes</button>  
 <app-recipe-details  *ngIf="showRecipeDetails" [displayRecipe]="selectedRecipe"></app-recipe-details>
+</div>

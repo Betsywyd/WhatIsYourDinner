@@ -45,4 +45,5 @@ export class RecipeDetailsComponent implements OnInit{
 
   @Input() displayRecipe:Recipe={} as Recipe;
 
+
 }

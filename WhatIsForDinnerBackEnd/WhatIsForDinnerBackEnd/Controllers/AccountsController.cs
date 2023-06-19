@@ -89,6 +89,10 @@ namespace WhatIsForDinnerBackEnd.Controllers
           {
               return Problem("Entity set 'WhatIsForDinnerDbContext.Accounts'  is null.");
           }
+            if (account.Name == null)
+            {
+                return Problem("Object is not an invalid value!");
+            }
             _context.Accounts.Add(account);
             await _context.SaveChangesAsync();
 
@@ -108,6 +112,9 @@ namespace WhatIsForDinnerBackEnd.Controllers
             {
                 return NotFound();
             }
+            List<Favorite> matching = _context.Favorites.Where(f => f.AccountId == id).ToList();
+            _context.Favorites.RemoveRange(matching);
+
 
             _context.Accounts.Remove(account);
             await _context.SaveChangesAsync();
