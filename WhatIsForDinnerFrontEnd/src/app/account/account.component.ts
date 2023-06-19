@@ -95,6 +95,13 @@ deleteAccount():void{
 this.accountService.deleteAccount(this.id).subscribe(
   ()=>{
     this.accountList.slice(this.index,1);
+    this.accountService.getAllAccounts().subscribe(
+      (result)=>{
+        console.log(result);
+        this.accountList = result;
+       
+      }
+    );
   }
 )
 this.finishDelete=true;

@@ -50,12 +50,6 @@ for(let i=0;i<this.accountList.length;i++){
 
   )
 
-
-
-
-
-
-
 }
 
 
