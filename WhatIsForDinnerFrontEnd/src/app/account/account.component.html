@@ -3,9 +3,9 @@
 <p>Name:</p>
 <input type="text" [(ngModel)]="logInAccount.name">
 <p>Email:</p>
-<input type="text" [(ngModel)]="logInAccount.email">
+<input type="email" [(ngModel)]="logInAccount.email">
 <p>Password</p>
-<input type="text" [(ngModel)]="logInAccount.password">
+<input type="password" [(ngModel)]="logInAccount.password">
 <button (click)="logIn()">Log In</button>
 
 <h3 *ngIf="checkExist">This account isn't exist</h3>
@@ -14,7 +14,13 @@
 <div *ngIf="welcome">
 <h3 >Welcome {{getCurrentAccountName()}} <button (click)="logOut()">Log Out</button></h3>
 <button (click)="deleteAccount()">Delete account {{deletedAccountName()}}</button>
+<app-edit-password></app-edit-password>
+
 
 </div>
 
 <h2 *ngIf="finishDelete">Account {{deletedAccountName()}} already delete from What's for dinner</h2>
+
+
+
+

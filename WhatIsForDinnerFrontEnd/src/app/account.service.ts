@@ -8,9 +8,9 @@ import { Account } from './account';
 })
 export class AccountService {
   currentAccount:Account = {} as Account;
-  currentAccountLogedIn:boolean=false;
-  // showLogin:boolean = true; // Display form
-  // isLoggedIn:boolean = false; // Display header menu
+  currentAccountLogedIn:boolean= false;
+  passWordChange:boolean=false;
+
 
 
 

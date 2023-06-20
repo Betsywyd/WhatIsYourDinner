@@ -9,5 +9,5 @@
 </div>
 
 
-<h2 *ngIf="createSuccess && !existAccount">Account Created Successfully,log in your account!</h2>
+<h2 *ngIf="createSuccess && !existAccount">Account {{newAccount.name}} Created Successfully,log in your account!</h2>
 <h2 *ngIf="existAccount && !createSuccess">This account already exist, please change name and email!</h2>

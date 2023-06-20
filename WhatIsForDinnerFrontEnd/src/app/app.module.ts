@@ -11,6 +11,7 @@ import { CreateAccountComponent } from './create-account/create-account.componen
 import { RecipeComponent } from './recipe/recipe.component';
 import { RecipeDetailsComponent } from './recipe-details/recipe-details.component';
 import { SavedRecipeComponent } from './saved-recipe/saved-recipe.component';
+import { EditPasswordComponent } from './edit-password/edit-password.component';
 
 const routes : Route[] = [
   {path:'createAccount', component:CreateAccountComponent},
@@ -28,7 +29,8 @@ const routes : Route[] = [
     CreateAccountComponent,
     RecipeComponent,
     RecipeDetailsComponent,
-    SavedRecipeComponent
+    SavedRecipeComponent,
+    EditPasswordComponent
   ],
   imports: [
     BrowserModule,

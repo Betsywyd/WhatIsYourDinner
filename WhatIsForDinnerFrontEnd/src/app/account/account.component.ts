@@ -17,18 +17,12 @@ export class AccountComponent implements OnInit{
   finishDelete:boolean=false;
   id:number=-1;
   index:number=-1;
- 
-
-constructor(private accountService:AccountService){
-
-}
   
 
-
+constructor(private accountService:AccountService){}
+  
   ngOnInit(): void {
   
-
-
     // if(this.accountService.currentAccountLogedIn==true){
     //   this.logInAccount=this.accountService.currentAccount;
     //   this.logedIn=true;
@@ -40,6 +34,7 @@ constructor(private accountService:AccountService){
        
       }
     );
+   
   }
 
 
@@ -50,10 +45,8 @@ checkAccount():boolean{
   {
     if(this.logInAccount.name==this.accountList[i].name&&this.logInAccount.email==this.accountList[i].email&&this.logInAccount.password==this.accountList[i].password){
       this.accountService.currentAccount=this.accountList[i];
-      // this.logInAccount=this.accountList[i];
       this.id=this.accountList[i].id;
       this.index=i;
-      // this.accountService.currentAccountLogedIn=this.welcome;
      return true;
     } 
   }
@@ -61,7 +54,13 @@ checkAccount():boolean{
 }
 
 logIn(){
-
+  this.accountService.getAllAccounts().subscribe(
+    (result)=>{
+      console.log(result);
+      this.accountList = result;
+     
+    }
+  );
   if(this.checkAccount()==true){
    
     this.accountService.currentAccountLogedIn=true;
@@ -114,6 +113,8 @@ this.welcome=false;
 deletedAccountName():string{
 return this.accountService.currentAccount.name;
 }
+
+
 
 }
 
