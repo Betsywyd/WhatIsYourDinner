@@ -9,6 +9,7 @@ import { Observable } from 'rxjs';
 export class SpoonacualarService {
 
   url: string = "https://localhost:7114/api/Spoonacular";
+  comparedRecipeIds:number[] = [];
 
   constructor(private http:HttpClient) { }
   
@@ -31,6 +32,10 @@ export class SpoonacualarService {
 
   GetAnalizedInstructions(recipeId:number):Observable<any>{
     return this.http.get<AnalyzedInstructions[]>(this.url+"/Getingredients/"+recipeId)
+  }
+
+  getCompareRecipeIds():number[]{
+    return this.comparedRecipeIds
   }
 
 }
