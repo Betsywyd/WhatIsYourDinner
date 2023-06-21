@@ -21,6 +21,8 @@ showRecipeDetails:boolean=false;
 // favRecipe:Recipe={} as Recipe;
 accountFavorites:Favorite[]=[];
 account:Account={} as Account;
+// check:boolean=false;
+
 
 
 
@@ -31,9 +33,10 @@ constructor(private spoonacualarService:SpoonacualarService,private accountServi
     console.log(this.accountService.currentAccount);
   // this.favoriteService.getFavoritesByAccountId(this.accountService.currentAccount.id).subscribe(
   //   (result)=>{
-  //     let accountFavRecipes:
+  //     // let accountFavRecipes:
       
-  //     this.accountFavorites=result;}
+  //     // this.accountFavorites=result;
+  //   }
   // );
 
   }
@@ -67,20 +70,39 @@ constructor(private spoonacualarService:SpoonacualarService,private accountServi
        console.log(this.accountService.currentAccount.name)
       }
 
-    // addToFavorites(recipeId:number){
-    //   let newFavorite:Favorite ={id:0,accountId:this.accountService.currentAccount.id,recipeId:recipeId, account:null};
-    //  this.favoriteService.addFavorite(newFavorite).subscribe(
-    //   (result:Favorite)=>{
-    //     this.accountFavorites.push(newFavorite);
-    //   }
-    //  )
-     
+      
 
-    // }
+    addToFavorites(recipeId:number){
+      // let check=this.CheckExistInSavedRecipe(recipeId);
+      // if(this.check==true){
+        let newFavorite:Favorite ={id:0,accountId:this.accountService.currentAccount.id,recipeId:recipeId, account:null};
+        console.log(this.accountService.currentAccount.id);
+        console.log(recipeId);
+  
+        console.log(newFavorite);
+        this.favoriteService.addFavorite(newFavorite).subscribe(
+        ()=>{
+          this.accountFavorites.push(newFavorite);
+        }
+       )
+    //   }
+    //   else{
+    // this.
+    //   }
+      
+    }
+  
 
     backRecipe(){
       this.showRecipeDetails=false;
     }
-  
+
+    // CheckIfExistInSavedRecipe(recipeId:number){
+    //   this.spoonacualarService.CheckExistInSavedRecipe(recipeId).subscribe(
+    //     (result:boolean)=>{
+    //      this.check=result;
+    //     }
+    //   );
+    // }
 
 }

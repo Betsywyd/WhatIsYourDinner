@@ -1,1 +1,4 @@
-<p>favorite works!</p>
+<div *ngFor="let f of favoritesSavedRecipes">
+    <p>Title:{{f.id}}</p>
+    <img src={{f.image}}>
+</div>

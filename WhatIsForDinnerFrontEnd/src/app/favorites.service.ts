@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Favorite } from './favorite';
 import { Recipe } from './recipe';
+import { SavedRecipe } from './saved-recipe';
 
 @Injectable({
   providedIn: 'root'
@@ -14,8 +15,8 @@ export class FavoritesService {
  
   constructor(private http:HttpClient) { }
 
-  getAllFavorites():Observable<Favorite>{
-    return this.http.get<Favorite>(this.url)
+  getAllFavorites():Observable<Favorite[]>{
+    return this.http.get<Favorite[]>(this.url)
   }
 
   getFavoriteById(id:number):Observable<Favorite> {
@@ -23,7 +24,7 @@ export class FavoritesService {
   }
  
   addFavorite(newValue:Favorite):Observable<any> {
-    return this.http.post<void>(this.url, newValue);
+    return this.http.post<Favorite>(this.url, newValue);
   }
  
   putFavorite(id:number, newValue:Favorite):Observable<any> {
@@ -34,10 +35,12 @@ export class FavoritesService {
     return this.http.delete<any>(this.url + "/" + id);
   }
 
-  getFavoritesByAccountId(accountId:number):Observable<Recipe[]>{
-    return this.http.get<Recipe[]>(this.url+"/AccountFav/"+accountId)
-  }
+  // getFavoritesByAccountId(accountId:number):Observable<SavedRecipe[]>{
+  //   return this.http.get<SavedRecipe[]>(this.url+"/AccountFav/"+accountId)
+  // }
  
-
+  getAccountFav(accountId:number):Observable<SavedRecipe[]>{
+    return this.http.get<SavedRecipe[]>(this.url+"/AccountFav/"+accountId)
+  }
 
 }

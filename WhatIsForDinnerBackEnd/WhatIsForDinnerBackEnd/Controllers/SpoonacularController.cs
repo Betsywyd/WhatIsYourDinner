@@ -9,6 +9,7 @@ namespace WhatIsForDinnerBackEnd.Controllers
     public class SpoonacularController : ControllerBase
     {
         spoonacularDAL spoonacularDAL = new spoonacularDAL();
+        WhatIsForDinnerDbContext db = new WhatIsForDinnerDbContext();
         
         [HttpGet("Recipe/{id}")]
         public Recipe GetRecipeById(int id)
@@ -40,18 +41,22 @@ namespace WhatIsForDinnerBackEnd.Controllers
             return r.analyzedInstructions;
         }
 
-        //[HttpGet("GetInstructions/{recipeId}")]
-        //public Step[] GetInstructions(int recipeId)
-        //{
-        //    Recipe r = spoonacularDAL.GetRecipe(recipeId);
-        //    List<AnalizedInstructions> analizedInstructions = r.analyzedInstructions.ToList();
-        //    List<Step> steps = new List<Step>();
-        //    for(int i = 0; i < analizedInstructions.Count; i++)
-        //    {
-        //        steps.Add(analizedInstructions[i].steps);
-        //    }
-
-        //}
+        [HttpGet("GetSteps/{recipeId}")]
+        public Step[] GetSteps(int recipeId)
+        {
+            Recipe r = spoonacularDAL.GetRecipe(recipeId);
+            List<AnalizedInstructions> analizedInstructions = r.analyzedInstructions.ToList();
+            List<Step> stepsList = new List<Step>();
+            for (int i = 0; i < analizedInstructions.Count; i++)
+            {
+                for(int j = 0; j < analizedInstructions[i].steps.Length; j++)
+                {
+                    stepsList.Add(analizedInstructions[i].steps[j]);
+                }
+               
+            }
+            return stepsList.ToArray();
+        }
 
 
 
@@ -62,12 +67,63 @@ namespace WhatIsForDinnerBackEnd.Controllers
             return spoonacularDAL.GetIngredient(id);
         }
 
+
+        [HttpGet("fill")]
+        public void FillInDb()
+        {
+            List<int> recipeIdList = new List<int>();
+            List<string> ingredientName = new List<string>()
+            {
+                "beef",
+                //"carrot",
+                //"pork",
+                //"tomato",
+                //"crab"
+            };
+
+            for(int i=0;i<ingredientName.Count;i++)
+            {
+               
+                RecipeSearchResult rr = spoonacularDAL.GetRecipeResult(ingredientName[i]);
+                for(int j=0;j<rr.results.Length;j++)
+                {
+                    recipeIdList.Add(rr.results[j].id);
+                }
+            }
+            for(int i = 0; i < recipeIdList.Count; i++)
+            {
+                Recipe r = spoonacularDAL.GetRecipe(recipeIdList[i]);
+                SavedRecipe savedRecipe = new SavedRecipe() { Id = 0, RecipeId = r.id, Title = r.title, Ingredients = r.extendedIngredients.ToString(), IngredientAmount = "", Image = r.image, ReadyInMinutes = r.readyInMinutes, Servings = r.servings,AnalizedInstructions=r.analyzedInstructions.ToString(),Favorites=null};
+                db.SavedRecipes.Add(savedRecipe);
+            }
+            
+            db.SaveChanges();
+        }
+
+        [HttpGet("fill/{recipeId}")]
+        public void FillInDb(int recipeId)
+        {
+            Recipe r = spoonacularDAL.GetRecipe(recipeId);
+            SavedRecipe savedRecipe = new SavedRecipe() { Id = 0, RecipeId = r.id, Title = r.title, Ingredients = r.extendedIngredients.ToString(), IngredientAmount = "", Image = r.image, ReadyInMinutes = r.readyInMinutes, Servings = r.servings, AnalizedInstructions = r.analyzedInstructions.ToString(), Favorites = null };
+            db.SavedRecipes.Add(savedRecipe);
+
+        }
+
+
+
+
+
+        [HttpGet("CheckExistInSavedRecipe/{recipeId}")]
+        public bool CheckRecipeExitInSavedRecipe(int recipeId)
+        {
+            SavedRecipe savedRecipe = db.SavedRecipes.Where(s=>s.RecipeId==recipeId).FirstOrDefault();
+            if(savedRecipe!=null)
+            {
+                return true;
+            }
+            else { return false; }
+        }
+
+
     }
-
-
-
-
-
-
-
 }

@@ -17,7 +17,8 @@ const routes : Route[] = [
   {path:'createAccount', component:CreateAccountComponent},
   {path:'login', component:AccountComponent},
   {path:'favorites',component:FavoriteComponent},
-  {path:'recipes',component:RecipeComponent}
+  {path:'recipes',component:RecipeComponent},
+  {path:'popularRecipes',component:SavedRecipeComponent}
  
 ];
 

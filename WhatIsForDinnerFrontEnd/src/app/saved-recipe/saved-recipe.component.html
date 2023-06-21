@@ -1,1 +1,14 @@
-<p>saved-recipe works!</p>
+
+<div  *ngIf="!showRecipeDetails" >
+<div *ngFor="let s of savedRecipeList; index as i">
+<p>Title:{{s.title}}</p><button (click)="getRecipeDetails(s.id)">See Details</button>
+<img src={{s.image}}>
+<!-- <button (click)="addToFavorites(s.id)">Add To Favorite</button> -->
+</div>
+</div>
+
+
+<div>
+<button *ngIf="showRecipeDetails"  (click)="backRecipe()">Get Back Recipes</button>  
+<app-recipe-details  *ngIf="showRecipeDetails" [displayRecipe]="selectedRecipe"></app-recipe-details>
+</div>
