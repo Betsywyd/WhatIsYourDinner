@@ -1,13 +1,15 @@
-<div *ngFor="let r of comparedRecipes; index as i">
+<div *ngFor="let r of comparedRecipes; index as i" class="card">
     <p>{{r.title}}</p>
     <img src={{r.image}}>
-    <div *ngFor="let a of comparedRecipes[i].analyzedInstructions">
+    <div *ngFor="let a of comparedRecipes[i].analyzedInstructions" class="container">
         <div *ngFor="let s of a.steps">
             <p>{{s.step}}</p>
         </div>
     </div>
     <div *ngFor="let i of comparedRecipes[i].extendedIngredients">
-        <p>{{i.amount}} {{i.unit}} - {{i.name}}</p>
+
+        <input type="checkbox" id="item[i]">
+        <label for="item[i]">{{i.amount}} {{i.unit}} - {{i.name}}</label>
         
     </div>
 </div>
