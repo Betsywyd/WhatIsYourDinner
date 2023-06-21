@@ -1,15 +1,16 @@
-<div *ngIf="!checkLogIn()">
+<div *ngIf="!checkLogIn()" class="main">
 <h2>What's for dinner!</h2>
 
-<a routerLink="createAccount">Create an account</a><br><br>
-<a routerLink="login">LogIn</a><br><br>
+<a routerLink="createAccount">Create an account</a>
+<a routerLink="login">LogIn</a>
 </div>
-<div *ngIf="checkLogIn()">
-<a routerLink="favorites">Favorites</a><br><br>
-<a routerLink="recipes">Recipes</a><br><br>
+<div *ngIf="checkLogIn()" class="navbar">
+<a routerLink="favorites">Favorites</a>
+<a routerLink="recipes">Recipes</a>
 <a routerLink="compare">Compare</a>
 </div>
-<router-outlet></router-outlet>
-
+<div class="main">
+    <router-outlet></router-outlet>
+</div>
 
 
