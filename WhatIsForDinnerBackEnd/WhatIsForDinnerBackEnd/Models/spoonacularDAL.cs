@@ -24,8 +24,7 @@ namespace WhatIsForDinnerBackEnd.Models
             RestRequest request = new RestRequest();
             request.AddQueryParameter("apiKey", Secret.ApiKey);
             Task<RecipeSearchResult> response = client.GetAsync<RecipeSearchResult>(request);
-           
-
+  
             return response.Result;
         }
 

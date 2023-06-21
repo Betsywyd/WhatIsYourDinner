@@ -19,7 +19,11 @@ const routes : Route[] = [
   {path:'login', component:AccountComponent},
   {path:'favorites',component:FavoriteComponent},
   {path:'recipes',component:RecipeComponent},
+
+  {path:'popularRecipes',component:SavedRecipeComponent},
+
   {path:'compare', component:CompareRecipesComponent}
+// 9b0ec7fd2f72cd86d1b65ab09d86e805d3415fe0
  
 ];
 

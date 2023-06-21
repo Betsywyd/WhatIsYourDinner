@@ -11,8 +11,8 @@ import { AccountService } from '../account.service';
 export class RecipeDetailsComponent implements OnInit{
 
   ingredients:ExtendedIngredient[]=[];
-  // analyzedInstructionsList: AnalyzedInstructions[]=[];
-  // steps:Step[]=[];
+  analyzedInstructionsList: AnalyzedInstructions[]=[];
+  steps:Step[]=[];
 
   constructor(private spoonacualarService:SpoonacualarService,private accountService:AccountService){
 
@@ -25,7 +25,12 @@ export class RecipeDetailsComponent implements OnInit{
         console.log(this.displayRecipe.id);
       }
     )
-
+    this.spoonacualarService.GetSteps(this.displayRecipe.id).subscribe(
+      (result:Step[])=>{
+        this.steps=result;
+        console.log(result);
+      }
+    )
     
   }
   
@@ -34,7 +39,7 @@ export class RecipeDetailsComponent implements OnInit{
   //     (result:AnalyzedInstructions[])=>{
   //       this.analyzedInstructionsList=result;
   //       for(let i=0;i<this.analyzedInstructionsList.length;i++){
-
+  //        this.steps=this.analyzedInstructionsList[i].steps;
   //       }
   //       console.log(result);
   //     }

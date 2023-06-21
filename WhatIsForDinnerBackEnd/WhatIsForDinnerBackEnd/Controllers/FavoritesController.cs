@@ -53,13 +53,22 @@ namespace WhatIsForDinnerBackEnd.Controllers
         public List<SavedRecipe> GetAccountFav(int accountId)
         {
             List<Favorite> favoritesList = _context.Favorites.ToList();
-            List<Favorite> accountFav = favoritesList.Where(f=>f.AccountId == accountId).ToList();
-            List<int> recipeId= accountFav.Select(f => f.RecipeId!).ToList();
-            List<SavedRecipe> favoritesRecipe= _context.SavedRecipes.Where(r=>recipeId.Contains(r.RecipeId!)).ToList();
-
-            
-            return favoritesRecipe;    
+            List<Favorite> accountFav = favoritesList.Where(f => f.AccountId == accountId).ToList();
+            List<int> recipeIds = accountFav.Select(f => f.RecipeId).ToList();
+            List<SavedRecipe> favoritesRecipe=new List<SavedRecipe>();
+            for (int i = 0; i < recipeIds.Count; i++)
+            {
+                SavedRecipe savedRecipe= _context.SavedRecipes.Where(s=>s.RecipeId== recipeIds[i]).FirstOrDefault();
+                favoritesRecipe.Add(savedRecipe);
+            }
+            //List<SavedRecipe> favoritesRecipe = _context.SavedRecipes.Where(s => recipeIds.Contains(s.RecipeId)).ToList();
+            return favoritesRecipe;
         }
+
+
+
+
+
 
         // GET: api/Favorites/5
         [HttpGet("{id}")]
@@ -119,7 +128,7 @@ namespace WhatIsForDinnerBackEnd.Controllers
           {
               return Problem("Entity set 'WhatIsForDinnerDbContext.Favorites'  is null.");
           }
-          favorite.Id =null;
+          //favorite.Id =null;
 
             _context.Favorites.Add(favorite);
             await _context.SaveChangesAsync();

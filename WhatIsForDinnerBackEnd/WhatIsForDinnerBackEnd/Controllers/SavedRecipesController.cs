@@ -119,5 +119,24 @@ namespace WhatIsForDinnerBackEnd.Controllers
         {
             return (_context.SavedRecipes?.Any(e => e.Id == id)).GetValueOrDefault();
         }
+
+        [HttpGet("SavedRecipe/{recipeId}")]
+        public SavedRecipe GetSavedRecipeByRecipeId(int recipeId)
+        {
+            SavedRecipe savedRecipe = _context.SavedRecipes.Where(s => s.RecipeId == recipeId).First();
+            if(savedRecipe==null)
+            {
+               return null; 
+            }
+            return savedRecipe;
+        }
+        [HttpGet("RecipeId/{savedRecipeId}")]
+        public int GetRecipeIdBySavedRecipeId(int savedRecipeId)
+        {
+            SavedRecipe savedRecipe = _context.SavedRecipes.Where(s=>s.Id == savedRecipeId).FirstOrDefault();
+            int id = savedRecipe.RecipeId;
+            return id;
+        }
+
     }
 }
