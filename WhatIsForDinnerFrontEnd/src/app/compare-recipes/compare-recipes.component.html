@@ -1,0 +1,13 @@
+<div *ngFor="let r of comparedRecipes; index as i">
+    <p>{{r.title}}</p>
+    <img src={{r.image}}>
+    <div *ngFor="let a of comparedRecipes[i].analyzedInstructions">
+        <div *ngFor="let s of a.steps">
+            <p>{{s.step}}</p>
+        </div>
+    </div>
+    <div *ngFor="let i of comparedRecipes[i].extendedIngredients">
+        <p>{{i.amount}} {{i.unit}} - {{i.name}}</p>
+        
+    </div>
+</div>

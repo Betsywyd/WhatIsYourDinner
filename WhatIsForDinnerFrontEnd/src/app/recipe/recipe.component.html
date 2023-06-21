@@ -11,9 +11,16 @@
 <div *ngFor="let r of results;index as i">
 <p>Title:{{r.title}}</p><button (click)="getRecipeDetails(r.id)">See Details</button>
 <img src={{r.image}}>
+
 <button (click)="addToFavorites(r.id)">Add To Favorite</button>
+<button  *ngIf="!compareIsMaxed" (click)="addRecipeToCompareList(r.id)">Compare</button>
+<!-- <button *ngIf="isCompared" (click)="removeRecipeFromCompareList(r.id)">Stop Comparing</button> -->
+<!-- <button (click)="addToFavorites(r.id)">Add To Favorite</button> -->
+>>>>>>> 9b0ec7fd2f72cd86d1b65ab09d86e805d3415fe0
 </div>
 </div>
 <button *ngIf="showRecipeDetails"  (click)="backRecipe()">Get Back Recipes</button>  
 <app-recipe-details  *ngIf="showRecipeDetails" [displayRecipe]="selectedRecipe"></app-recipe-details>
 </div>
+
+

@@ -12,13 +12,18 @@ import { RecipeComponent } from './recipe/recipe.component';
 import { RecipeDetailsComponent } from './recipe-details/recipe-details.component';
 import { SavedRecipeComponent } from './saved-recipe/saved-recipe.component';
 import { EditPasswordComponent } from './edit-password/edit-password.component';
+import { CompareRecipesComponent } from './compare-recipes/compare-recipes.component';
 
 const routes : Route[] = [
   {path:'createAccount', component:CreateAccountComponent},
   {path:'login', component:AccountComponent},
   {path:'favorites',component:FavoriteComponent},
   {path:'recipes',component:RecipeComponent},
-  {path:'popularRecipes',component:SavedRecipeComponent}
+
+  {path:'popularRecipes',component:SavedRecipeComponent},
+
+  {path:'compare', component:CompareRecipesComponent}
+// 9b0ec7fd2f72cd86d1b65ab09d86e805d3415fe0
  
 ];
 
@@ -31,7 +36,8 @@ const routes : Route[] = [
     RecipeComponent,
     RecipeDetailsComponent,
     SavedRecipeComponent,
-    EditPasswordComponent
+    EditPasswordComponent,
+    CompareRecipesComponent
   ],
   imports: [
     BrowserModule,

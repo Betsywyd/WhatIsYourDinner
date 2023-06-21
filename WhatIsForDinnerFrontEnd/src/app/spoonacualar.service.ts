@@ -9,7 +9,11 @@ import { Observable } from 'rxjs';
 export class SpoonacualarService {
 
   url: string = "https://localhost:7114/api/Spoonacular";
+
  
+
+  comparedRecipeIds:number[] = [];
+//  9b0ec7fd2f72cd86d1b65ab09d86e805d3415fe0
 
   constructor(private http:HttpClient) { }
   
@@ -34,12 +38,18 @@ export class SpoonacualarService {
     return this.http.get<AnalyzedInstructions[]>(this.url+"/Getingredients/"+recipeId)
   }
 
+
   GetSteps(recipeId:number):Observable<any>{
     return this.http.get<Step[]>(this.url+"/GetSteps/"+recipeId)
   }
 
   CheckExistInSavedRecipe(recipeId:number):Observable<boolean>{
     return this.http.get<boolean>(this.url+"/CheckExistInSavedRecipe/"+recipeId)
+  }
+
+  getCompareRecipeIds():number[]{
+    return this.comparedRecipeIds;
+//  9b0ec7fd2f72cd86d1b65ab09d86e805d3415fe0
   }
 
 }

@@ -6,6 +6,7 @@ import { FavoritesService } from '../favorites.service';
 import { Favorite } from '../favorite';
 import { SavedRecipe } from '../saved-recipe';
 import { Account } from '../account';
+import { NavigationExtras, Router } from '@angular/router';
 
 @Component({
   selector: 'app-recipe',
@@ -21,12 +22,18 @@ showRecipeDetails:boolean=false;
 // favRecipe:Recipe={} as Recipe;
 accountFavorites:Favorite[]=[];
 account:Account={} as Account;
+<<<<<<< HEAD
 // check:boolean=false;
 
+=======
+comparedRecipeIds:number[] = [];
+compareMaximum:number = 4;
+compareIsMaxed:boolean = false; 
+isCompared:boolean = false;
+>>>>>>> 9b0ec7fd2f72cd86d1b65ab09d86e805d3415fe0
 
 
-
-constructor(private spoonacualarService:SpoonacualarService,private accountService:AccountService,private favoriteService:FavoritesService){}
+constructor(private spoonacualarService:SpoonacualarService,private accountService:AccountService,private favoriteService:FavoritesService, private router:Router){}
   ngOnInit(): void {
     this.welcome=this.accountService.currentAccountLogedIn;
     this.account=this.accountService.currentAccount;
@@ -60,6 +67,30 @@ constructor(private spoonacualarService:SpoonacualarService,private accountServi
       )
     }
 
+    
+    addRecipeToCompareList(recipeId:number){
+      if(this.comparedRecipeIds.length < this.compareMaximum){
+        this.comparedRecipeIds.push(recipeId);
+        this.spoonacualarService.comparedRecipeIds = this.comparedRecipeIds;
+        this.isCompared = true;
+      }
+      else if(this.comparedRecipeIds.length = this.compareMaximum){
+        this.compareIsMaxed = true; 
+      }
+      console.log(this.comparedRecipeIds);
+      
+    }
+
+    // removeRecipeFromCompareList(recipeId:number){
+    //   for(let i = 0; i < this.comparedRecipeIds.length; i++){
+    //     if(recipeId = this.comparedRecipeIds[i]){
+    //       this.comparedRecipeIds.splice(i);
+    //       this.isCompared = false;
+    //     }
+    //   }
+    // }
+    
+    
 
       logOut(){
         this.accountService.currentAccountLogedIn=false;
