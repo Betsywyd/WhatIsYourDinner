@@ -15,10 +15,6 @@ export class RecipeDetailsComponent implements OnInit{
   steps:Step[]=[];
 
   constructor(private spoonacualarService:SpoonacualarService,private accountService:AccountService){
-
-  }
-
-  ngOnInit(): void {
     this.spoonacualarService.GetExtendedingredients(this.displayRecipe.id).subscribe(
       (result:ExtendedIngredient[])=>{
         this.ingredients=result;
@@ -31,6 +27,10 @@ export class RecipeDetailsComponent implements OnInit{
         console.log(result);
       }
     )
+    
+  }
+
+  ngOnInit(): void {
     
   }
   

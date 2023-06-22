@@ -23,7 +23,7 @@ showRecipeDetails:boolean=false;
 accountFavorites:Favorite[]=[];
 account:Account={} as Account;
 savedRecipeId:number=-1;
-check:boolean=false;
+checkExist:boolean=false;
 
 
 comparedRecipeIds:number[] = [];
@@ -104,12 +104,12 @@ constructor(private spoonacualarService:SpoonacualarService,private accountServi
       
 
     addToFavorites(recipeId:number){
-      let check=this.checkIfExistInSavedRecipe(recipeId);
+      this.checkIfExistInSavedRecipe(recipeId);
       
       this.spoonacualarService.GetSavedRecipeIdByRecipeId(recipeId).subscribe(
         (result:number)=>{this.savedRecipeId=result}
       );
-      if(this.check==true){
+      if(this.checkExist==true){
         let newFavorite:Favorite ={id:0,accountId:this.accountService.currentAccount.id,recipeId:this.savedRecipeId};//this recipeId is savedRecipeId;
         console.log(this.accountService.currentAccount.id);
         console.log(this.savedRecipeId);
@@ -126,6 +126,7 @@ constructor(private spoonacualarService:SpoonacualarService,private accountServi
       this.spoonacualarService.FillSavedRecipeDb(recipeId).subscribe(
         ()=>{}
       )
+      
       this.addToFavorites(recipeId);
       }
       
@@ -139,7 +140,7 @@ constructor(private spoonacualarService:SpoonacualarService,private accountServi
     checkIfExistInSavedRecipe(recipeId:number){
       this.spoonacualarService.CheckExistInSavedRecipe(recipeId).subscribe(
         (result:boolean)=>{
-         this.check=result;
+         this.checkExist=result;
         }
       );
     }

@@ -75,10 +75,10 @@ namespace WhatIsForDinnerBackEnd.Controllers
             List<string> ingredientName = new List<string>()
             {
                 "beef",
-                //"carrot",
-                //"pork",
-                //"tomato",
-                //"crab"
+                "carrot",
+                "pork",
+                "tomato",
+                "crab"
             };
 
             for(int i=0;i<ingredientName.Count;i++)
@@ -93,6 +93,8 @@ namespace WhatIsForDinnerBackEnd.Controllers
             for(int i = 0; i < recipeIdList.Count; i++)
             {
                 Recipe r = spoonacularDAL.GetRecipe(recipeIdList[i]);
+                //Extendedingredient[] e = r.extendedIngredients;
+              
                 SavedRecipe savedRecipe = new SavedRecipe() { Id = 0, RecipeId = r.id, Title = r.title, Ingredients = r.extendedIngredients.ToString(), IngredientAmount = "", Image = r.image, ReadyInMinutes = r.readyInMinutes, Servings = r.servings,AnalizedInstructions=r.analyzedInstructions.ToString(),Favorites=null};
                 db.SavedRecipes.Add(savedRecipe);
             }
