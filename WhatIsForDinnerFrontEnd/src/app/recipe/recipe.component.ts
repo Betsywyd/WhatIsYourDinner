@@ -22,15 +22,15 @@ showRecipeDetails:boolean=false;
 // favRecipe:Recipe={} as Recipe;
 accountFavorites:Favorite[]=[];
 account:Account={} as Account;
-<<<<<<< HEAD
-// check:boolean=false;
+savedRecipeId:number=-1;
+check:boolean=false;
 
-=======
+
 comparedRecipeIds:number[] = [];
 compareMaximum:number = 4;
 compareIsMaxed:boolean = false; 
 isCompared:boolean = false;
->>>>>>> 9b0ec7fd2f72cd86d1b65ab09d86e805d3415fe0
+//  9b0ec7fd2f72cd86d1b65ab09d86e805d3415fe0
 
 
 constructor(private spoonacualarService:SpoonacualarService,private accountService:AccountService,private favoriteService:FavoritesService, private router:Router){}
@@ -81,14 +81,14 @@ constructor(private spoonacualarService:SpoonacualarService,private accountServi
       
     }
 
-    // removeRecipeFromCompareList(recipeId:number){
-    //   for(let i = 0; i < this.comparedRecipeIds.length; i++){
-    //     if(recipeId = this.comparedRecipeIds[i]){
-    //       this.comparedRecipeIds.splice(i);
-    //       this.isCompared = false;
-    //     }
-    //   }
-    // }
+    removeRecipeFromCompareList(recipeId:number){
+      for(let i = 0; i < this.comparedRecipeIds.length; i++){
+        if(recipeId = this.comparedRecipeIds[i]){
+          this.comparedRecipeIds.splice(i);
+          this.isCompared = false;
+        }
+      }
+    }
     
     
 
@@ -104,22 +104,30 @@ constructor(private spoonacualarService:SpoonacualarService,private accountServi
       
 
     addToFavorites(recipeId:number){
-      // let check=this.CheckExistInSavedRecipe(recipeId);
-      // if(this.check==true){
-        let newFavorite:Favorite ={id:0,accountId:this.accountService.currentAccount.id,recipeId:recipeId, account:null};
+      let check=this.checkIfExistInSavedRecipe(recipeId);
+      
+      this.spoonacualarService.GetSavedRecipeIdByRecipeId(recipeId).subscribe(
+        (result:number)=>{this.savedRecipeId=result}
+      );
+      if(this.check==true){
+        let newFavorite:Favorite ={id:0,accountId:this.accountService.currentAccount.id,recipeId:this.savedRecipeId};//this recipeId is savedRecipeId;
         console.log(this.accountService.currentAccount.id);
-        console.log(recipeId);
+        console.log(this.savedRecipeId);
   
         console.log(newFavorite);
         this.favoriteService.addFavorite(newFavorite).subscribe(
-        ()=>{
+        (result:Favorite)=>{
           this.accountFavorites.push(newFavorite);
+          console.log(result);
         }
        )
-    //   }
-    //   else{
-    // this.
-    //   }
+      }
+      else{
+      this.spoonacualarService.FillSavedRecipeDb(recipeId).subscribe(
+        ()=>{}
+      )
+      this.addToFavorites(recipeId);
+      }
       
     }
   
@@ -128,12 +136,12 @@ constructor(private spoonacualarService:SpoonacualarService,private accountServi
       this.showRecipeDetails=false;
     }
 
-    // CheckIfExistInSavedRecipe(recipeId:number){
-    //   this.spoonacualarService.CheckExistInSavedRecipe(recipeId).subscribe(
-    //     (result:boolean)=>{
-    //      this.check=result;
-    //     }
-    //   );
-    // }
+    checkIfExistInSavedRecipe(recipeId:number){
+      this.spoonacualarService.CheckExistInSavedRecipe(recipeId).subscribe(
+        (result:boolean)=>{
+         this.check=result;
+        }
+      );
+    }
 
 }

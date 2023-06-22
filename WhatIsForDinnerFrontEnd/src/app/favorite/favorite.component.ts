@@ -3,6 +3,9 @@ import { FavoritesService } from '../favorites.service';
 import { Favorite } from '../favorite';
 import { AccountService } from '../account.service';
 import { SavedRecipe } from '../saved-recipe';
+import { SavedRecipeService } from '../saved-recipe.service';
+import { SpoonacualarService } from '../spoonacualar.service';
+import { Recipe } from '../recipe';
 
 @Component({
   selector: 'app-favorite',
@@ -13,9 +16,10 @@ export class FavoriteComponent implements OnInit{
 
  favoritesSavedRecipes:SavedRecipe[]=[];
  currentAccountFav:number[]=[];
-
-
-  constructor(private favoriteService:FavoritesService,private accountService:AccountService){};
+ showRecipeDetails:boolean=false;
+ selectedRecipe: Recipe={} as Recipe;
+ 
+  constructor(private favoriteService:FavoritesService,private accountService:AccountService,private savedRecipeService:SavedRecipeService,private spoonacualarService:SpoonacualarService){};
   ngOnInit(): void {
     let id:number=this.accountService.currentAccount.id;
     console.log(id);
@@ -27,10 +31,20 @@ export class FavoriteComponent implements OnInit{
     );
   }
 
+  getRecipeDetails(id:number){
+    this.savedRecipeService.GetRecipeIdBySavedRecipeId(id).subscribe(
+      (result:number)=>{
+        this.spoonacualarService.getRecipe(result).subscribe(
+          (result:Recipe)=>{
+            this.selectedRecipe=result;
+            this.showRecipeDetails=true;
+          }
+        )
+      }
+      ) 
+  }
 
-
-
-
-
-
+  backRecipe(){
+    this.showRecipeDetails=false;
+  }
 }

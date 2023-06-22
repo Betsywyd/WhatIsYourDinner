@@ -47,6 +47,15 @@ export class SpoonacualarService {
     return this.http.get<boolean>(this.url+"/CheckExistInSavedRecipe/"+recipeId)
   }
 
+  GetSavedRecipeIdByRecipeId(recipeId:number):Observable<number>{
+    return this.http.get<number>(this.url+"/SavedRecipeId/"+recipeId)
+  }
+
+  FillSavedRecipeDb(recipeId:number):Observable<any>{
+    return this.http.get<any>(this.url+"/FillByRecipeId/"+recipeId)
+  }
+
+
   getCompareRecipeIds():number[]{
     return this.comparedRecipeIds;
 //  9b0ec7fd2f72cd86d1b65ab09d86e805d3415fe0

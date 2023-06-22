@@ -68,7 +68,7 @@ namespace WhatIsForDinnerBackEnd.Controllers
         }
 
 
-        [HttpGet("fill")]
+        [HttpGet("Fill")]
         public void FillInDb()
         {
             List<int> recipeIdList = new List<int>();
@@ -100,8 +100,8 @@ namespace WhatIsForDinnerBackEnd.Controllers
             db.SaveChanges();
         }
 
-        [HttpGet("fill/{recipeId}")]
-        public void FillInDb(int recipeId)
+        [HttpGet("FillByRecipeId/{recipeId}")]
+        public void FillSavedRecipeDb(int recipeId)
         {
             Recipe r = spoonacularDAL.GetRecipe(recipeId);
             SavedRecipe savedRecipe = new SavedRecipe() { Id = 0, RecipeId = r.id, Title = r.title, Ingredients = r.extendedIngredients.ToString(), IngredientAmount = "", Image = r.image, ReadyInMinutes = r.readyInMinutes, Servings = r.servings, AnalizedInstructions = r.analyzedInstructions.ToString(), Favorites = null };
@@ -124,6 +124,12 @@ namespace WhatIsForDinnerBackEnd.Controllers
             else { return false; }
         }
 
+        [HttpGet("SavedRecipeId/{recipeId}")]
+        public int GetSavedRecipeIdByRecipeId(int recipeId)
+        {
+            int savedRecipeId = db.SavedRecipes.Where(s => s.RecipeId == recipeId).FirstOrDefault().Id;
+            return savedRecipeId;
+        }
 
     }
 }

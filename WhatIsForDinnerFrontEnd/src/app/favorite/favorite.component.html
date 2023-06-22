@@ -1,4 +1,19 @@
-<div *ngFor="let f of favoritesSavedRecipes">
+<!-- <div *ngFor="let f of favoritesSavedRecipes">
     <p>Title:{{f.id}}</p>
     <img src={{f.image}}>
-</div>
+    <button></button>
+</div> -->
+
+<div  *ngIf="!showRecipeDetails" >
+    <div *ngFor="let f of favoritesSavedRecipes; index as i">
+    <p>Title:{{f.title}}</p><button (click)="getRecipeDetails(f.id)">See Details</button>
+    <img src={{f.image}}>
+    <!-- <button (click)="addToFavorites(s.id)">Add To Favorite</button> -->
+    </div>
+    </div>
+    
+    
+    <div>
+    <button *ngIf="showRecipeDetails"  (click)="backRecipe()">Get Back Recipes</button>  
+    <app-recipe-details  *ngIf="showRecipeDetails" [displayRecipe]="selectedRecipe"></app-recipe-details>
+    </div>
