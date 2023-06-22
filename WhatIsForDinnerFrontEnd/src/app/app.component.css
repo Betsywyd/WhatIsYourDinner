@@ -1,6 +1,6 @@
 .navbar{
     overflow:hidden;
-    background-color: #333;
+    background-color: #269b60;
     position: fixed;
     top: 0;
     width: 100%;
@@ -24,3 +24,21 @@
     margin-top: 50px;
 
 }
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  li a {
+    display: block;
+    width: 200px;
+    /* background-color: #dddddd; */
+    margin-top: 20px;
+  }
+
+  li a:hover {
+    background-color: #dfe9f8;
+    color: rgb(12, 44, 229);
+  }
