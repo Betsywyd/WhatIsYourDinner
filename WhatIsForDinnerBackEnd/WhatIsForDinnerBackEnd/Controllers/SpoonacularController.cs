@@ -49,11 +49,11 @@ namespace WhatIsForDinnerBackEnd.Controllers
             List<Step> stepsList = new List<Step>();
             for (int i = 0; i < analizedInstructions.Count; i++)
             {
-                for(int j = 0; j < analizedInstructions[i].steps.Length; j++)
+                for (int j = 0; j < analizedInstructions[i].steps.Length; j++)
                 {
                     stepsList.Add(analizedInstructions[i].steps[j]);
                 }
-               
+
             }
             return stepsList.ToArray();
         }
@@ -75,28 +75,28 @@ namespace WhatIsForDinnerBackEnd.Controllers
             List<string> ingredientName = new List<string>()
             {
                 "beef",
-                //"carrot",
-                //"pork",
-                //"tomato",
-                //"crab"
+                "carrot",
+                "pork",
+                "tomato",
+                "crab"
             };
 
-            for(int i=0;i<ingredientName.Count;i++)
+            for (int i = 0; i < ingredientName.Count; i++)
             {
-               
+
                 RecipeSearchResult rr = spoonacularDAL.GetRecipeResult(ingredientName[i]);
-                for(int j=0;j<rr.results.Length;j++)
+                for (int j = 0; j < rr.results.Length; j++)
                 {
                     recipeIdList.Add(rr.results[j].id);
                 }
             }
-            for(int i = 0; i < recipeIdList.Count; i++)
+            for (int i = 0; i < recipeIdList.Count; i++)
             {
                 Recipe r = spoonacularDAL.GetRecipe(recipeIdList[i]);
-                SavedRecipe savedRecipe = new SavedRecipe() { Id = 0, RecipeId = r.id, Title = r.title, Ingredients = r.extendedIngredients.ToString(), IngredientAmount = "", Image = r.image, ReadyInMinutes = r.readyInMinutes, Servings = r.servings,AnalizedInstructions=r.analyzedInstructions.ToString(),Favorites=null};
+                SavedRecipe savedRecipe = new SavedRecipe() { Id = 0, RecipeId = r.id, Title = r.title, Ingredients = r.extendedIngredients.ToString(), IngredientAmount = "", Image = r.image, ReadyInMinutes = r.readyInMinutes, Servings = r.servings, AnalizedInstructions = r.analyzedInstructions.ToString(), Favorites = null };
                 db.SavedRecipes.Add(savedRecipe);
             }
-            
+
             db.SaveChanges();
         }
 
@@ -116,8 +116,8 @@ namespace WhatIsForDinnerBackEnd.Controllers
         [HttpGet("CheckExistInSavedRecipe/{recipeId}")]
         public bool CheckRecipeExitInSavedRecipe(int recipeId)
         {
-            SavedRecipe savedRecipe = db.SavedRecipes.Where(s=>s.RecipeId==recipeId).FirstOrDefault();
-            if(savedRecipe!=null)
+            SavedRecipe savedRecipe = db.SavedRecipes.Where(s => s.RecipeId == recipeId).FirstOrDefault();
+            if (savedRecipe != null)
             {
                 return true;
             }
