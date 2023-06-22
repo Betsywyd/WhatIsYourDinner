@@ -23,4 +23,6 @@ export class AppComponent implements OnInit{
     return this.accountService.currentAccountLogedIn;
   }
 
+ 
+
 }

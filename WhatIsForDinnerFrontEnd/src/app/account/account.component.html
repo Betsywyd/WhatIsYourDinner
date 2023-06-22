@@ -12,9 +12,11 @@
 </div>
 
 <div *ngIf="welcome">
-<h3 >Welcome {{getCurrentAccountName()}} <button (click)="logOut()">Log Out</button></h3>
-<button (click)="deleteAccount()">Delete account {{deletedAccountName()}}</button>
+<button (click)="logOut()" class="button">Log Out</button>
 <app-edit-password></app-edit-password>
+<button (click)="deleteAccount()" class="button">Delete account {{deletedAccountName()}}</button>
+
+<h3 >Welcome {{getCurrentAccountName()}} </h3>
 
 
 </div>
