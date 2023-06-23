@@ -14,7 +14,7 @@
             
             <button  *ngIf="!compareIsMaxed" (click)="addRecipeToCompareList(r.id)">Compare</button>
             <button *ngIf="isCompared" (click)="removeRecipeFromCompareList(r.id)">Stop Comparing</button>
-            <button (click)="addToFavorites(r.id)">Add To Favorite</button>
+            <button (click)="addToFavorites(r.id, account.id)">Add To Favorite</button>
             
         
         
