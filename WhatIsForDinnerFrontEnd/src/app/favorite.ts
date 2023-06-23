@@ -8,7 +8,7 @@ export interface Favorite {
     id:        number;
     accountId: number;
     recipeId:  number;
-    // account:   null;
+    account:   null;
 }
 
 // Converts JSON strings to/from your types

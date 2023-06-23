@@ -54,14 +54,14 @@ namespace WhatIsForDinnerBackEnd.Controllers
         {
             List<Favorite> favoritesList = _context.Favorites.ToList();
             List<Favorite> accountFav = favoritesList.Where(f => f.AccountId == accountId).ToList();
-            List<int> savedRecipeIds = accountFav.Select(f => f.Id).ToList();
-            List<SavedRecipe> favoritesRecipe=new List<SavedRecipe>();
+            List<int> savedRecipeIds = accountFav.Select(f => f.RecipeId).ToList();
+            List<SavedRecipe> favoritesRecipe = new List<SavedRecipe>();
             for (int i = 0; i < savedRecipeIds.Count; i++)
             {
-                SavedRecipe savedRecipe= _context.SavedRecipes.Where(s=>s.Id== savedRecipeIds[i]).FirstOrDefault();
+                SavedRecipe savedRecipe = _context.SavedRecipes.Where(s => s.Id == savedRecipeIds[i]).FirstOrDefault();
                 favoritesRecipe.Add(savedRecipe);
             }
-            //List<SavedRecipe> favoritesRecipe = _context.SavedRecipes.Where(s => recipeIds.Contains(s.RecipeId)).ToList();
+            //List<SavedRecipe> favoritesRecipe = _context.SavedRecipes.Where(s => savedRecipeIds.Contains(s.RecipeId)).ToList();
             return favoritesRecipe;
         }
 
