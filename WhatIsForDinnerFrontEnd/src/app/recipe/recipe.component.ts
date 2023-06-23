@@ -151,8 +151,8 @@ constructor(private spoonacualarService:SpoonacualarService,private accountServi
       
     // }
   
-    addToFavorites(recipeId:number){
-      this.favoriteService.addALLToFavorites(recipeId).subscribe(
+    addToFavorites(recipeId:number, accountId:number){
+      this.favoriteService.addALLToFavorites(recipeId, accountId).subscribe(
         (result) => {
           console.log(result);
           this.accountFavorites.push(result);

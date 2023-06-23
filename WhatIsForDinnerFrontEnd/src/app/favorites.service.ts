@@ -43,8 +43,8 @@ export class FavoritesService {
     return this.http.get<SavedRecipe[]>(this.url+"/AccountFav/"+accountId)
   }
 
-  addALLToFavorites(recipeId:number):Observable<Favorite>{
-    return this.http.post<Favorite>(this.url + "/CreateFavorite/" + recipeId, {})
+  addALLToFavorites(recipeId:number, accountId:number):Observable<Favorite>{
+    return this.http.post<Favorite>(this.url + "/CreateFavorite/" + recipeId + "?accountId=" +accountId, {})
   }
 
 }
