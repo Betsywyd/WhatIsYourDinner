@@ -30,7 +30,7 @@ comparedRecipeIds:number[] = [];
 compareMaximum:number = 4;
 compareIsMaxed:boolean = false; 
 isCompared:boolean = false;
-
+showDetails:boolean = false;
 
 
 constructor(private spoonacualarService:SpoonacualarService,private accountService:AccountService,private favoriteService:FavoritesService, private router:Router){}
@@ -47,6 +47,10 @@ constructor(private spoonacualarService:SpoonacualarService,private accountServi
   // );
 
   }
+
+  toggleDetails(){
+    this.showDetails = true;
+  }
     
     getRecipe():void{
       this.spoonacualarService.searchRecipe(this.input).subscribe(
@@ -59,6 +63,7 @@ constructor(private spoonacualarService:SpoonacualarService,private accountServi
     }
 
     getRecipeDetails(id:number){
+
       this.spoonacualarService.getRecipe(id).subscribe(
         (result:Recipe)=>{
           this.selectedRecipe=result;
@@ -103,46 +108,60 @@ constructor(private spoonacualarService:SpoonacualarService,private accountServi
 
       
 
-    addToFavorites(recipeId:number){
-      // checkIfExistInSavedRecipe(recipeId:number){
-        this.spoonacualarService.CheckExistInSavedRecipe(recipeId).subscribe(
-          (result:boolean)=>{
-           this.checkExist=result;
-           this.spoonacualarService.GetSavedRecipeIdByRecipeId(recipeId).subscribe(
-            (result:number)=>{this.savedRecipeId=result}
-          );
-          if(this.checkExist==true){
-            let newFavorite:Favorite ={id:0,accountId:this.accountService.currentAccount.id,recipeId:this.savedRecipeId,account:null};//this recipeId is savedRecipeId;
-            console.log(this.accountService.currentAccount.id);
-            console.log(this.savedRecipeId);
+    // addToFavorites(recipeId:number){
+    //   // checkIfExistInSavedRecipe(recipeId:number){
+       
+    //     this.spoonacualarService.CheckExistInSavedRecipe(recipeId).subscribe(
+    //       (result:boolean)=>{
+    //        this.checkExist=result;
+    //        this.spoonacualarService.GetSavedRecipeIdByRecipeId(recipeId).subscribe(
+    //         (result:number)=>{this.savedRecipeId=result}
+    //       );
+    //       if(this.checkExist==true){
+    //         let newFavorite:Favorite ={id:0,accountId:this.accountService.currentAccount.id,recipeId:this.savedRecipeId,account:null};//this recipeId is savedRecipeId;
+    //         console.log(this.accountService.currentAccount.id);
+    //         console.log(this.savedRecipeId);
       
-            console.log(newFavorite);
-            this.favoriteService.addFavorite(newFavorite).subscribe(
-            (result:Favorite)=>{
-              this.accountFavorites.push(newFavorite);
-              console.log(result);
-            }
-           )
-          }
-          else{
-          this.spoonacualarService.FillSavedRecipeDb(recipeId).subscribe(
-            ()=>{}
-          )
+    //         console.log(newFavorite);
+    //         console.log("test");
+    //         this.favoriteService.addFavorite(newFavorite).subscribe(
+    //         (result:Favorite)=>{
+    //           console.log("test");
+    //           this.accountFavorites.push(newFavorite);
+    //           console.log(result);
+    //         }
+    //        )
+    //       }
+    //       else{
+    //       this.spoonacualarService.FillSavedRecipeDb(recipeId).subscribe(
+            
+    //         ()=>{
+    //           console.log("test");
+    //         }
+    //       )
           
-          this.addToFavorites(recipeId);
-          }
-          }
-        );
+    //       this.addToFavorites(recipeId);
+    //       }
+    //       }
+    //     );
       
-      // this.checkIfExistInSavedRecipe(recipeId);
+    //   // this.checkIfExistInSavedRecipe(recipeId);
       
    
       
-    }
+    // }
   
+    addToFavorites(recipeId:number){
+      this.favoriteService.addALLToFavorites(recipeId).subscribe(
+        (result) => {
+          console.log(result);
+          this.accountFavorites.push(result);
+        }
+      )
+    }
 
-    backRecipe(){
-      this.showRecipeDetails=false;
+    hideRecipeDetails(){
+      this.showDetails=false;
     }
 
 

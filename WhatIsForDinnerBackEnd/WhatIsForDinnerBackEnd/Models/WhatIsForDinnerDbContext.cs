@@ -69,10 +69,10 @@ public partial class WhatIsForDinnerDbContext : DbContext
                 .HasMaxLength(1)
                 .IsUnicode(false)
                 .HasColumnName("image");
-            entity.Property(e => e.IngredientAmount)
-                .HasMaxLength(1)
-                .IsUnicode(false)
-                .HasColumnName("ingredientAmount");
+            //entity.Property(e => e.IngredientAmount)
+            //    .HasMaxLength(1)
+            //    .IsUnicode(false)
+            //    .HasColumnName("ingredientAmount");
             entity.Property(e => e.Ingredients)
                 .HasMaxLength(1)
                 .IsUnicode(false)

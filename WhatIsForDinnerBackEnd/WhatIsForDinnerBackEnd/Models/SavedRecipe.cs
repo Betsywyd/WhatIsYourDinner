@@ -13,8 +13,6 @@ public partial class SavedRecipe
 
     public string? Ingredients { get; set; }
 
-    public string? IngredientAmount { get; set; }
-
     public string Image { get; set;}
     public int? ReadyInMinutes { get; set; }
 

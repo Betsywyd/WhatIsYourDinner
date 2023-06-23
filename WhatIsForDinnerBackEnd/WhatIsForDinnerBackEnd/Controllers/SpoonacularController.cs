@@ -95,7 +95,7 @@ namespace WhatIsForDinnerBackEnd.Controllers
                 Recipe r = spoonacularDAL.GetRecipe(recipeIdList[i]);
                 //Extendedingredient[] e = r.extendedIngredients;
               
-                SavedRecipe savedRecipe = new SavedRecipe() { Id = 0, RecipeId = r.id, Title = r.title, Ingredients = r.extendedIngredients.ToString(), IngredientAmount = "", Image = r.image, ReadyInMinutes = r.readyInMinutes, Servings = r.servings,AnalizedInstructions=r.analyzedInstructions.ToString(),Favorites=null};
+                SavedRecipe savedRecipe = new SavedRecipe() { Id = 0, RecipeId = r.id, Title = r.title, Ingredients = r.extendedIngredients.ToString(), Image = r.image, ReadyInMinutes = r.readyInMinutes, Servings = r.servings,AnalizedInstructions=r.analyzedInstructions.ToString(),Favorites=null};
 
 
 
@@ -109,7 +109,7 @@ namespace WhatIsForDinnerBackEnd.Controllers
         public void FillSavedRecipeDb(int recipeId)
         {
             Recipe r = spoonacularDAL.GetRecipe(recipeId);
-            SavedRecipe savedRecipe = new SavedRecipe() { Id = 0, RecipeId = r.id, Title = r.title, Ingredients = r.extendedIngredients.ToString(), IngredientAmount = "", Image = r.image, ReadyInMinutes = r.readyInMinutes, Servings = r.servings, AnalizedInstructions = r.analyzedInstructions.ToString(), Favorites = null };
+            SavedRecipe savedRecipe = new SavedRecipe() { Id = 0, RecipeId = r.id, Title = r.title, Ingredients = r.extendedIngredients.ToString(), Image = r.image, ReadyInMinutes = r.readyInMinutes, Servings = r.servings, AnalizedInstructions = r.analyzedInstructions.ToString(), Favorites = null };
             db.SavedRecipes.Add(savedRecipe);
 
         }

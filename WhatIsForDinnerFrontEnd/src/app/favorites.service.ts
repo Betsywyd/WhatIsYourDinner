@@ -23,9 +23,9 @@ export class FavoritesService {
     return this.http.get<Favorite>(this.url + "/" + id);
   }
  
-  addFavorite(newValue:Favorite):Observable<any> {
-    return this.http.post<Favorite>(this.url, newValue);
-  }
+  // addFavorite(newValue:Favorite):Observable<any> {
+  //   return this.http.post<Favorite>(this.url, newValue);
+  // }
  
   putFavorite(id:number, newValue:Favorite):Observable<any> {
     return this.http.put<any>(this.url + "/" + id, newValue);
@@ -41,6 +41,10 @@ export class FavoritesService {
  
   getAccountFav(accountId:number):Observable<SavedRecipe[]>{
     return this.http.get<SavedRecipe[]>(this.url+"/AccountFav/"+accountId)
+  }
+
+  addALLToFavorites(recipeId:number):Observable<Favorite>{
+    return this.http.post<Favorite>(this.url + "/CreateFavorite/" + recipeId, {})
   }
 
 }

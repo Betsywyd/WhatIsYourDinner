@@ -14,7 +14,7 @@ namespace WhatIsForDinnerBackEnd.Controllers
     public class FavoritesController : ControllerBase
     {
         private readonly WhatIsForDinnerDbContext _context;
-
+        private readonly spoonacularDAL spoonacularDAL = new spoonacularDAL();
         public FavoritesController(WhatIsForDinnerDbContext context)
         {
             _context = context;
@@ -159,6 +159,75 @@ namespace WhatIsForDinnerBackEnd.Controllers
         private bool FavoriteExists(int id)
         {
             return (_context.Favorites?.Any(e => e.Id == id)).GetValueOrDefault();
+        }
+
+        [HttpPost("CreateFavorite/{recipeId}")]
+        public async Task<ActionResult<Favorite>> PostAllToFavorite(int recipeId, int accountId)
+        {
+           List<int> savedRecipeIds = _context.SavedRecipes.Where(e => e.RecipeId == recipeId).Select(e => e.Id).ToList();
+            List<int> userFavs = _context.Favorites.Where(id => id.AccountId == accountId).Select(id => id.RecipeId).ToList();
+           //Recipe exsistis in backend, no neep to call API
+            if(savedRecipeIds.Count() > 0)
+            {
+                //recipe already saved& faved
+                if(savedRecipeIds.Any(sr => userFavs.Contains(sr)))
+                {
+
+                    return new Favorite();
+                }
+                else
+                {
+                    Favorite favorite = new Favorite() { RecipeId= savedRecipeIds[0], AccountId=accountId };
+                    _context.Favorites.Add(favorite);
+                    await _context.SaveChangesAsync();
+
+                    return CreatedAtAction("GetFavorite", new { id = favorite.Id }, favorite);
+                }
+            }
+            //Favorite doesnt exist nor does saved recipe
+            else
+            {
+                Recipe recipe = spoonacularDAL.GetRecipe(recipeId);
+                SavedRecipe sr = new SavedRecipe();
+                sr.RecipeId = recipeId;
+                sr.Title = recipe.title;
+                List<string> IngredientNames = recipe.extendedIngredients.Select(n => n.name).ToList();
+                List<float> IngredientAmounts = recipe.extendedIngredients.Select(n => n.amount).ToList();
+                List<string> IngredientUnits = recipe.extendedIngredients.Select(n => n.unit).ToList();
+                string ingredients = "";
+                for(int i = 0; i < IngredientNames.Count; i++)
+                {
+                    ingredients += IngredientNames[i] + "," + IngredientAmounts[i] + "," + IngredientUnits[i] + "\n";
+                }
+                sr.Ingredients = ingredients;
+                sr.Image = recipe.image;
+                sr.ReadyInMinutes = recipe.readyInMinutes;
+                sr.Servings = recipe.servings;
+                
+                //Check instructions format
+                if(recipe.analyzedInstructions.Length > 0)
+                {
+                    List<string> steps = recipe.analyzedInstructions[0].steps.Select(s => s.step).ToList();
+                    sr.AnalizedInstructions = string.Join(",", steps);
+                }
+                else
+                {
+                    sr.AnalizedInstructions = recipe.instructions;
+                }
+               
+                _context.SavedRecipes.Add(sr);
+                await _context.SaveChangesAsync();
+
+                sr = _context.SavedRecipes.FirstOrDefault(saved => saved.RecipeId == recipeId);
+                Favorite favorite = new Favorite() { RecipeId = sr.Id, AccountId = accountId };
+                _context.Favorites.Add(favorite);
+                await _context.SaveChangesAsync();
+
+                return CreatedAtAction("GetFavorite", new { id = favorite.Id }, favorite);
+            }
+
+            //favorite.Id =null;
+
         }
     }
 }

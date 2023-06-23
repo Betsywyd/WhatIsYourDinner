@@ -41,7 +41,7 @@ export class FavoriteComponent implements OnInit{
           }
         )
       }
-      ) 
+      );
   }
 
   backRecipe(){
