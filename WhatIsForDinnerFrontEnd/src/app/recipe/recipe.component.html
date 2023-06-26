@@ -4,9 +4,9 @@
 
 
         <div *ngIf="!showRecipeDetails">
-        <p>IngredientName:</p>
+        <p>Ingredient Name:</p>
         <input type="text" [(ngModel)]="input">
-        <button (click)="getRecipe()">SearchTerm</button>
+        <button (click)="getRecipe()">Search</button>
 
         <div *ngFor="let r of results;index as i">
             <p>Title:{{r.title}}</p>
