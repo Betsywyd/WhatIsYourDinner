@@ -4,34 +4,36 @@
         <div *ngIf="!showRecipeDetails">
         <p>Ingredient Name:</p>
         <input type="text" [(ngModel)]="input">
-
-
-
         <button (click)="getRecipe()">Search</button>
         <br><br>
-        <div class="grid-container">
-        <div class="gallery">
-        <div *ngFor="let r of results;index as i">
+
+
+      
+            <div class="flex">
+        <div *ngFor="let r of results;index as i" style="width: 24%; border-style:ridge;">
             <!-- <div class="desc"><p>{{r.title}}</p></div> -->
             <!-- <img src={{r.image}}> -->
             <button  *ngIf="!compareIsMaxed" (click)="addRecipeToCompareList(r.id)">Compare</button>
             <button *ngIf="isCompared" (click)="removeRecipeFromCompareList(r.id)">Stop Comparing</button>
             <button (click)="addToFavorites(r.id, account.id)">Add To Favorite</button>
         
-            <button (click)="displayDetails(r.id)"><img src={{r.image}}><p class="desc">{{r.title}}</p></button>
+            <!-- <button (click)="displayDetails(r.id)"><img src={{r.image}}><p class="desc">{{r.title}}</p></button> -->
 
             <!-- <button (click)=" getRecipeDetails(r.id)"><img src={{r.image}}><p class="desc">{{r.title}}</p></button><br><br> -->
-           
+            <button (click)=" displayDetails(r.id)" class="clearbutton"><img style="width: 80%; margin:auto;"  src={{r.image}}><br><p>{{r.title}}</p></button><br>
             
         
         </div>
     </div>
 </div>
-    </div>
-</div>
+   
+<!-- </div> -->
     <app-recipe-details  *ngIf="showRecipeDetails" [displayRecipe]="selectedSavedRecipe"></app-recipe-details>
 
 
     <button *ngIf="showRecipeDetails"  (click)="backRecipe()">Get Back Recipes</button>  
     <!-- <app-recipe-details  *ngIf="showRecipeDetails" [displayRecipe]="selectedRecipe"></app-recipe-details> -->
+
+
+
 

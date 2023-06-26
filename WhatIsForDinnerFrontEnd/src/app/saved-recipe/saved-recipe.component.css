@@ -1,0 +1,14 @@
+.flex{
+    display:flex;
+    flex-flow: wrap;
+    
+}
+
+.row{
+    width: 100%;
+
+}
+
+.clearbutton{
+    all:unset;
+}

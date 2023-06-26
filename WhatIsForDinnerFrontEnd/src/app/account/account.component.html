@@ -9,6 +9,7 @@
 <button (click)="logIn()" class="btn">Log In</button>
 
 <h3 *ngIf="checkExist">This account doesn't exist</h3>
+<h2 *ngIf="finishDelete">Account {{deletedAccountName()}} already delete from What's for dinner</h2>
 </div>
 </div>
 <div *ngIf="welcome" >
@@ -21,7 +22,7 @@
 
 </div>
 
-<h2 *ngIf="finishDelete">Account {{deletedAccountName()}} already delete from What's for dinner</h2>
+
 
 
 

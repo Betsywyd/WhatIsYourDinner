@@ -1,4 +1,4 @@
-div.gallery {
+/* div.gallery {
     margin: 5px;
     border: 1px solid #ccc;
     float: left;
@@ -16,4 +16,21 @@ div.gallery {
   div.desc {
     padding: 15px;
     text-align: center;
-  }
+  } */
+
+
+
+  .flex{
+    display:flex;
+    flex-flow: wrap;
+    
+}
+
+.row{
+    width: 100%;
+
+}
+
+.clearbutton{
+    all:unset;
+}
