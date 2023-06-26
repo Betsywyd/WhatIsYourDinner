@@ -73,6 +73,7 @@ export class CompareRecipesComponent implements OnInit {
         
     }
 
+     
   }
 
     
