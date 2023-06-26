@@ -55,10 +55,14 @@ export class SpoonacualarService {
     return this.http.get<any>(this.url+"/FillByRecipeId/"+recipeId)
   }
 
+  getRecipes(recipeIds:string):Observable<Recipe[]>{
+    return this.http.get<Recipe[]>(this.url + "/Recipes?ids=" + recipeIds);
+  }
+
 
   getCompareRecipeIds():number[]{
     return this.comparedRecipeIds;
-//  9b0ec7fd2f72cd86d1b65ab09d86e805d3415fe0
+
   }
 
 }
