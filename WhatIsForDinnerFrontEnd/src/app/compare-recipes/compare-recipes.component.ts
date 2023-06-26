@@ -29,17 +29,30 @@ export class CompareRecipesComponent implements OnInit {
     this.comparedRecipeIds = this.spoonacularApi.getCompareRecipeIds();
     
     console.log(this.comparedRecipeIds);
-    for(let i = 0; i < this.comparedRecipeIds.length; i++){
-      this.spoonacularApi.getRecipe(this.comparedRecipeIds[i]).subscribe(
-        (result1:Recipe) => {
-          this.recipe = result1;
-          console.log(this.recipe);
-          this.comparedRecipes.push(result1);
-        });
+    let compareIds:string = "";
+    this.comparedRecipeIds.forEach((rIds:number)=>{
+      compareIds += (rIds+","); 
+    });
+    compareIds = compareIds.substring(0, compareIds.length-1);
+    this.spoonacularApi.getRecipes(compareIds).subscribe(
+      (result) => {
+        console.log(result);
+        this.comparedRecipes = result;
+        
+      }
+    )
+    // for(let i = 0; i < this.comparedRecipeIds.length; i++){
+    //   this.spoonacularApi.getRecipes(this.comparedRecipeIds[i]).subscribe(
+    //     (result1:Recipe) => {
+    //       this.recipe = result1;
+    //       console.log(this.recipe);
+    //       this.comparedRecipes.push(result1);
+       
           
           // for(let i = 0; i < this.recipe.extendedIngredients.length; i++){
           //   this.spoonacularApi.getIngredient(this.recipe.extendedIngredients[i].id).subscribe(
           //     (result2:Ingredient) => {
+          //       console.log(result2);
           //       if(result2.estimatedCost != null || result2.estimatedCost != undefined){
           //       result1.extendedIngredients[i].price = result2.estimatedCost.value;
           //       result1.extendedIngredients[i].priceUnit = result2.estimatedCost.unit;
@@ -48,15 +61,20 @@ export class CompareRecipesComponent implements OnInit {
           //       result1.extendedIngredients[i].price = 0;
           //       result1.extendedIngredients[i].priceUnit = "";
           //     }
-                // this.ingredients.push(result);
-                // console.log(this.ingredients);
-              //}
-            
-          }
-          }
+          //       // this.ingredients.push(result);
+          //       // console.log(this.ingredients);
+          //     }
+          //   );
+          //}
+
+        // });
+          // }
         
         
     }
+
+     
+  }
 
     
   

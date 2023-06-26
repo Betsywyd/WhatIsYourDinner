@@ -16,6 +16,17 @@ namespace WhatIsForDinnerBackEnd.Controllers
         {
             return spoonacularDAL.GetRecipe(id);
         }
+        [HttpGet("Recipes")]
+        public List<Recipe> GetRecipesById(string ids)
+        {
+            List<string> idList = ids.Split(',').ToList();
+            List<Recipe> recipes =new List<Recipe>();
+            for(int i = 0; i < idList.Count; i++)
+            {
+                recipes.Add(spoonacularDAL.GetRecipe(int.Parse(idList[i])));
+            }
+            return recipes;
+        }
 
 
         [HttpGet("Search/{input}")]

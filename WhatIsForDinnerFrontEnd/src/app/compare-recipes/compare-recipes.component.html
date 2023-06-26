@@ -13,5 +13,6 @@
         <label for="item[i]">{{e.amount}} {{e.unit}} - {{e.name}} </label>
     
     </div>
-    <p>Cost Per Serving: $ {{r.pricePerServing*.01}}</p>
+    <p>Servings: {{r.servings}}  Cost Per Serving: {{r.pricePerServing*.01 | currency}}</p>
+    <P>Total Estimated Cost: {{r.pricePerServing*.01*r.servings | currency}}</P>
 </div>
