@@ -2,9 +2,12 @@
     <h3 >Welcome {{getCurrentAccountName()}} <button (click)="logOut()">Log Out</button></h3>
 
         <div *ngIf="!showRecipeDetails">
-        <p>IngredientName:</p>
+        <p>Ingredient Name:</p>
         <input type="text" [(ngModel)]="input">
-        <button (click)="getRecipe()">SearchTerm</button>
+
+
+
+        <button (click)="getRecipe()">Search</button>
         <br><br>
         <div class="grid-container">
         <div class="gallery">
