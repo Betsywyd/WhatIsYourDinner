@@ -1,11 +1,12 @@
+<div class="container">
 <div *ngIf="!checkLogIn()" class="main">
 <h2>What's for dinner!</h2>
 <ul>
-<li><a routerLink="createAccount">Create an account</a></li>
-<li><a routerLink="login">LogIn</a></li>
+<li><a routerLink="createAccount"><h3>Create an account</h3></a></li>
+<li><a routerLink="login"><h3>Log In</h3></a></li>
 </ul>
 </div>
-
+</div>
 <div *ngIf="checkLogIn()" class="navbar">
 <a routerLink="favorites">Favorites</a>
 <a routerLink="recipes">Recipes</a>

@@ -1,0 +1,24 @@
+.container {
+    /* position: relative; */
+    position: fixed;
+    top: 200px;
+    left: 10px;
+    margin: 10px;
+    max-width: 300px;
+    padding: 16px;
+    background-color: white;
+  }
+
+  .btn {
+    background-color: #c496ec;
+    color: white;
+    padding: 16px 20px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    opacity: 0.9;
+  }
+  
+  .btn:hover {
+    opacity: 1;
+  }

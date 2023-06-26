@@ -197,7 +197,7 @@ namespace WhatIsForDinnerBackEnd.Controllers
                 string ingredients = "";
                 for(int i = 0; i < IngredientNames.Count; i++)
                 {
-                    ingredients += IngredientNames[i] + "," + IngredientAmounts[i] + "," + IngredientUnits[i] + "\n";
+                    ingredients +=(i+1)+"."+ IngredientNames[i] + "," +IngredientAmounts[i] + "," + IngredientUnits[i] + "\n"+".  ";
                 }
                 sr.Ingredients = ingredients;
                 sr.Image = recipe.image;
@@ -208,7 +208,11 @@ namespace WhatIsForDinnerBackEnd.Controllers
                 if(recipe.analyzedInstructions.Length > 0)
                 {
                     List<string> steps = recipe.analyzedInstructions[0].steps.Select(s => s.step).ToList();
-                    sr.AnalizedInstructions = string.Join(",", steps);
+                    for(int i = 0; i < steps.Count; i++)
+                    {
+                        sr.AnalizedInstructions +=(i+1)+"."+ steps[i]+"  ";
+                    }
+                    //sr.AnalizedInstructions = string.Join(",", steps);
                 }
                 else
                 {

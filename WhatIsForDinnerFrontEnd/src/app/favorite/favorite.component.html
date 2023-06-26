@@ -4,16 +4,18 @@
     <button></button>
 </div> -->
 
+<div class="gallery">
 <div  *ngIf="!showRecipeDetails" >
     <div *ngFor="let f of favoritesSavedRecipes; index as i">
-    <p>Title:{{f.title}}</p><button (click)="getRecipeDetails(f.id)">See Details</button>
-    <img src={{f.image}}>
+
+    <button (click)="getRecipeDetails(f.id)"><img src={{f.image}}><p class="desc">{{f.title}}</p></button><br>
+   
     
     </div>
     </div>
+</div>
     
-    
-    <div>
+<div>
     <button *ngIf="showRecipeDetails"  (click)="backRecipe()">Get Back Recipes</button>  
     <app-recipe-details  *ngIf="showRecipeDetails" [displayRecipe]="selectedRecipe"></app-recipe-details>
     </div>

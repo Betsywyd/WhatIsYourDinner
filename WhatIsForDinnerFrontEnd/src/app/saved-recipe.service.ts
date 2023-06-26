@@ -40,5 +40,8 @@ url:string="https://localhost:7114/api/SavedRecipes";
     return this.http.get<number>(this.url+"/RecipeId/"+savedRecipeId)
   }
 
+  PostSavedRecipeByRecipeId( recipeId:number):Observable<any>{
+    return this.http.post<void>(this.url + "/" +recipeId,{});
+  }
 
 }

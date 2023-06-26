@@ -1,23 +1,23 @@
-
+<div class="container">
 <div  *ngIf="!welcome">
-<p>Name:</p>
-<input type="text" [(ngModel)]="logInAccount.name">
-<p>Email:</p>
-<input type="email" [(ngModel)]="logInAccount.email">
-<p>Password</p>
-<input type="password" [(ngModel)]="logInAccount.password">
-<button (click)="logIn()">Log In</button>
+<p><b>Name</b></p>
+<input type="text" placeholder="Enter Name" [(ngModel)]="logInAccount.name">
+<p><b>Email</b></p>
+<input type="email" placeholder="Enter Email" [(ngModel)]="logInAccount.email">
+<p><b>Password</b></p>
+<input type="password" placeholder="Enter Password" [(ngModel)]="logInAccount.password">
+<button (click)="logIn()" class="btn">Log In</button>
 
 <h3 *ngIf="checkExist">This account doesn't exist</h3>
 </div>
-
-<div *ngIf="welcome">
+</div>
+<div *ngIf="welcome" >
+<div class="welcome">
 <button (click)="logOut()" class="button">Log Out</button>
 <app-edit-password></app-edit-password>
 <button (click)="deleteAccount()" class="button">Delete account {{deletedAccountName()}}</button>
-
+</div>
 <h3 >Welcome {{getCurrentAccountName()}} </h3>
-
 
 </div>
 

@@ -1,27 +1,34 @@
 <div *ngIf="welcome">
     <h3 >Welcome {{getCurrentAccountName()}} <button (click)="logOut()">Log Out</button></h3>
 
-
-
         <div *ngIf="!showRecipeDetails">
         <p>IngredientName:</p>
         <input type="text" [(ngModel)]="input">
         <button (click)="getRecipe()">SearchTerm</button>
-
+        <br><br>
+        <div class="grid-container">
+        <div class="gallery">
         <div *ngFor="let r of results;index as i">
-            <p>Title:{{r.title}}</p>
-            <img src={{r.image}}>
-            
+            <!-- <div class="desc"><p>{{r.title}}</p></div> -->
+            <!-- <img src={{r.image}}> -->
             <button  *ngIf="!compareIsMaxed" (click)="addRecipeToCompareList(r.id)">Compare</button>
             <button *ngIf="isCompared" (click)="removeRecipeFromCompareList(r.id)">Stop Comparing</button>
             <button (click)="addToFavorites(r.id, account.id)">Add To Favorite</button>
-            
         
+            <button (click)="displayDetails(r.id)"><img src={{r.image}}><p class="desc">{{r.title}}</p></button>
+
+            <!-- <button (click)=" getRecipeDetails(r.id)"><img src={{r.image}}><p class="desc">{{r.title}}</p></button><br><br> -->
+           
+            
         
         </div>
     </div>
 </div>
-    <!-- <app-recipe-details  *ngIf="showDetails" [displayRecipe]="selectedRecipe"></app-recipe-details> -->
+    </div>
+</div>
+    <app-recipe-details  *ngIf="showRecipeDetails" [displayRecipe]="selectedSavedRecipe"></app-recipe-details>
 
 
+    <button *ngIf="showRecipeDetails"  (click)="backRecipe()">Get Back Recipes</button>  
+    <!-- <app-recipe-details  *ngIf="showRecipeDetails" [displayRecipe]="selectedRecipe"></app-recipe-details> -->
 

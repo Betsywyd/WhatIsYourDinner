@@ -7,6 +7,7 @@ import { Favorite } from '../favorite';
 import { SavedRecipe } from '../saved-recipe';
 import { Account } from '../account';
 import { NavigationExtras, Router } from '@angular/router';
+import { SavedRecipeService } from '../saved-recipe.service';
 
 @Component({
   selector: 'app-recipe',
@@ -17,24 +18,29 @@ export class RecipeComponent implements OnInit{
 welcome:boolean=true;
 results:Result[]=[];
 input:string="";
-selectedRecipe: Recipe={} as Recipe;
+selectedSavedRecipe: SavedRecipe={} as SavedRecipe;
 showRecipeDetails:boolean=false;
-// favRecipe:Recipe={} as Recipe;
+selectedRecipe:Recipe={} as Recipe;
 accountFavorites:Favorite[]=[];
 account:Account={} as Account;
-savedRecipeId:number=-1;
+// savedRecipeId:number=-1;
 checkExist:boolean=false;
 
-
+savedRecipeList:SavedRecipe[]=[];
 comparedRecipeIds:number[] = [];
 compareMaximum:number = 4;
 compareIsMaxed:boolean = false; 
 isCompared:boolean = false;
-showDetails:boolean = false;
+// showDetails:boolean = false;
 
 
-constructor(private spoonacualarService:SpoonacualarService,private accountService:AccountService,private favoriteService:FavoritesService, private router:Router){}
+constructor(private spoonacualarService:SpoonacualarService,private accountService:AccountService,private favoriteService:FavoritesService, private router:Router,private savedRecipeService:SavedRecipeService){}
   ngOnInit(): void {
+    this.savedRecipeService.getAllSavedRecipe().subscribe(
+      (result:SavedRecipe[])=>{
+        this.savedRecipeList=result;
+      }
+     )
     this.welcome=this.accountService.currentAccountLogedIn;
     this.account=this.accountService.currentAccount;
     console.log(this.accountService.currentAccount);
@@ -48,9 +54,9 @@ constructor(private spoonacualarService:SpoonacualarService,private accountServi
 
   }
 
-  toggleDetails(){
-    this.showDetails = true;
-  }
+  // toggleDetails(){
+  //   this.showDetails = true;
+  // }
     
     getRecipe():void{
       this.spoonacualarService.searchRecipe(this.input).subscribe(
@@ -62,15 +68,39 @@ constructor(private spoonacualarService:SpoonacualarService,private accountServi
   
     }
 
-    getRecipeDetails(id:number){
+    // getRecipeDetails(id:number){
 
-      this.spoonacualarService.getRecipe(id).subscribe(
-        (result:Recipe)=>{
-          this.selectedRecipe=result;
-          this.showRecipeDetails=true;
-        }
-      )
+    //   this.spoonacualarService.getRecipe(id).subscribe(
+    //     (result:Recipe)=>{
+    //       this.selectedRecipe=result;
+    //       this.showRecipeDetails=true;
+    //     }
+    //   )
+    //   this.savedRecipeService.PostSavedRecipeByRecipeId(id).subscribe(
+    //     (result)=>{
+    //       this.savedRecipeList.push(result);
+    //       this.selectedSavedRecipe=result;
+    //     }
+    //    )
+    // }
+
+    displayDetails(recipeId:number){
+     this.savedRecipeService.PostSavedRecipeByRecipeId(recipeId).subscribe(
+      (result)=>{
+        this.savedRecipeList.push(result);
+        this.selectedSavedRecipe=result;
+        this.savedRecipeService.getAllSavedRecipe().subscribe(
+          (result:SavedRecipe[])=>{
+            this.savedRecipeList=result;
+          }
+         )
+
+      }
+     )
+    
+     this.showRecipeDetails=true;
     }
+
 
     
     addRecipeToCompareList(recipeId:number){
@@ -138,16 +168,11 @@ constructor(private spoonacualarService:SpoonacualarService,private accountServi
     //         ()=>{
     //           console.log("test");
     //         }
-    //       )
-          
+    //       )       
     //       this.addToFavorites(recipeId);
     //       }
     //       }
     //     );
-      
-    //   // this.checkIfExistInSavedRecipe(recipeId);
-      
-   
       
     // }
   
@@ -160,10 +185,13 @@ constructor(private spoonacualarService:SpoonacualarService,private accountServi
       )
     }
 
-    hideRecipeDetails(){
-      this.showDetails=false;
-    }
+    // hideRecipeDetails(){
+    //   this.showDetails=false;
+    // }
 
+    backRecipe(){
+      this.showRecipeDetails=false;
+    }
 
 
 }

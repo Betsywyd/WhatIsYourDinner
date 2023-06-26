@@ -14,6 +14,7 @@ namespace WhatIsForDinnerBackEnd.Controllers
     public class SavedRecipesController : ControllerBase
     {
         private readonly WhatIsForDinnerDbContext _context;
+        spoonacularDAL spoonacularDAL = new spoonacularDAL();
 
         public SavedRecipesController(WhatIsForDinnerDbContext context)
         {
@@ -94,6 +95,64 @@ namespace WhatIsForDinnerBackEnd.Controllers
 
             return CreatedAtAction("GetSavedRecipe", new { id = savedRecipe.Id }, savedRecipe);
         }
+
+        [HttpPost("{recipeId}")]
+        public async Task<ActionResult<SavedRecipe>> PostSavedRecipeByRecipeId(int recipeId)
+        {
+
+            if (_context.SavedRecipes == null)
+            {
+                return Problem("Entity set 'WhatIsForDinnerDbContext.SavedRecipes'  is null.");
+            }
+
+            Recipe recipe = spoonacularDAL.GetRecipe(recipeId);
+            bool check= _context.SavedRecipes.Select(s=>s.RecipeId).Contains(recipeId);
+            if (check == true)
+            {
+                return new SavedRecipe();
+            }
+            else { 
+            SavedRecipe sr = new SavedRecipe();
+            sr.RecipeId = recipeId;
+            sr.Title = recipe.title;
+            List<string> IngredientNames = recipe.extendedIngredients.Select(n => n.name).ToList();
+            List<float> IngredientAmounts = recipe.extendedIngredients.Select(n => n.amount).ToList();
+            List<string> IngredientUnits = recipe.extendedIngredients.Select(n => n.unit).ToList();
+            string ingredients = "";
+            for (int i = 0; i < IngredientNames.Count; i++)
+            {
+                //ingredients += IngredientNames[i] + "," + IngredientAmounts[i] + "," + IngredientUnits[i] + "\n";
+                 ingredients += (i + 1) + "." + IngredientNames[i] + "," + IngredientAmounts[i] + "," + IngredientUnits[i] + "\n"+ ".  ";
+                }
+            sr.Ingredients = ingredients;
+            sr.Image = recipe.image;
+            sr.ReadyInMinutes = recipe.readyInMinutes;
+            sr.Servings = recipe.servings;
+
+            //Check instructions format
+            if (recipe.analyzedInstructions.Length > 0)
+            {
+                List<string> steps = recipe.analyzedInstructions[0].steps.Select(s => s.step).ToList();
+                    //sr.AnalizedInstructions = string.Join(",", steps);
+                    for (int i = 0; i < steps.Count; i++)
+                    {
+                        sr.AnalizedInstructions += (i + 1) + "." + steps[i]+"  ";
+                    }
+                }
+            else
+            {
+                sr.AnalizedInstructions = recipe.instructions;
+            }
+
+            _context.SavedRecipes.Add(sr);
+            await _context.SaveChangesAsync();
+             return CreatedAtAction("GetSavedRecipe", new { id = sr.Id }, sr);
+            }
+
+        }
+
+
+
 
         // DELETE: api/SavedRecipes/5
         [HttpDelete("{id}")]

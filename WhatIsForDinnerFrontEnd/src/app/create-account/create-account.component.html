@@ -1,13 +1,14 @@
-<div>
-<p>Name:</p>
-<input type="text" [(ngModel)]="newAccount.name">
-<p>Email:</p>
-<input type="email" [(ngModel)]="newAccount.email">
-<p>Password</p>
-<input type="password" [(ngModel)]="newAccount.password">
-<button (click)="createAccount()">Create an new Account</button>
-</div>
+<div class="container">
+<p><b>Name</b></p>
+<input type="text" placeholder="Enter Name" [(ngModel)]="newAccount.name">
+<p><b>Email</b></p>
+<input type="email" placeholder="Enter Email" [(ngModel)]="newAccount.email">
+<p><b>Password</b></p>
+<input type="password" placeholder="Enter Password" [(ngModel)]="newAccount.password">
+<button (click)="createAccount()" class="btn">Create an new Account</button>
+
 
 
 <h2 *ngIf="createSuccess && !existAccount">Account {{newAccount.name}} Created Successfully,log in your account!</h2>
 <h2 *ngIf="existAccount && !createSuccess">This account already exist, please change name and email!</h2>
+</div>
