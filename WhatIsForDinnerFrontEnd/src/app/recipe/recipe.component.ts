@@ -84,22 +84,53 @@ constructor(private spoonacualarService:SpoonacualarService,private accountServi
     //    )
     // }
 
-    displayDetails(recipeId:number){
-     this.savedRecipeService.PostSavedRecipeByRecipeId(recipeId).subscribe(
-      (result)=>{
-        this.savedRecipeList.push(result);
-        this.selectedSavedRecipe=result;
-        this.savedRecipeService.getAllSavedRecipe().subscribe(
-          (result:SavedRecipe[])=>{
-            this.savedRecipeList=result;
-          }
-         )
+    // displayDetails(recipeId:number){
+    //  this.savedRecipeService.PostSavedRecipeByRecipeId(recipeId).subscribe(
+    //   (result)=>{
+    //     this.savedRecipeList.push(result);
+    //     this.selectedSavedRecipe=result;
+    //     this.savedRecipeService.getAllSavedRecipe().subscribe(
+    //       (result:SavedRecipe[])=>{
+    //         this.savedRecipeList=result;
+    //       }
+    //      )
 
+    //   }
+    //  )
+    //  this.showRecipeDetails=true;
+    // }
+
+
+
+
+    displayDetails(recipeId:number){
+      let savedRecipeListRecipeIds:number[]=[];
+      for(let i=0;i<this.savedRecipeList.length;i++){
+        savedRecipeListRecipeIds.push(this.savedRecipeList[i].recipeId);
       }
-     )
-    
-     this.showRecipeDetails=true;
+      if(savedRecipeListRecipeIds.includes(recipeId)){
+       this.savedRecipeService.GetSavedRecipeByRecipeId(recipeId).subscribe(
+        (result:SavedRecipe)=>{
+          this.selectedSavedRecipe=result;
+        }
+       )
+      }
+      else{
+      this.savedRecipeService.PostSavedRecipeByRecipeId(recipeId).subscribe(
+       (result)=>{
+         this.savedRecipeList.push(result);
+         this.selectedSavedRecipe=result;
+         this.savedRecipeService.getAllSavedRecipe().subscribe(
+           (result:SavedRecipe[])=>{
+             this.savedRecipeList=result;
+           }
+          )
+ 
+       }
+      )
     }
+      this.showRecipeDetails=true;
+     }
 
 
     
