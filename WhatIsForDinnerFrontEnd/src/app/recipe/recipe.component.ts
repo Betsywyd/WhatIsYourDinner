@@ -22,6 +22,7 @@ selectedSavedRecipe: SavedRecipe={} as SavedRecipe;
 showRecipeDetails:boolean=false;
 selectedRecipe:Recipe={} as Recipe;
 accountFavorites:Favorite[]=[];
+accountFavoritesIds:number[] = [];
 account:Account={} as Account;
 // savedRecipeId:number=-1;
 checkExist:boolean=false;
@@ -32,7 +33,7 @@ compareMaximum:number = 4;
 compareIsMaxed:boolean = false; 
 isCompared:boolean[] = [];
 // showDetails:boolean = false;
-
+isFavorited:boolean[] = [];
 
 constructor(private spoonacualarService:SpoonacualarService,private accountService:AccountService,private favoriteService:FavoritesService, private router:Router,private savedRecipeService:SavedRecipeService){}
   ngOnInit(): void {
@@ -40,11 +41,17 @@ constructor(private spoonacualarService:SpoonacualarService,private accountServi
       (result:SavedRecipe[])=>{
         this.savedRecipeList=result;
         this.isCompared.fill(false, 0, result.length);
+        this.isFavorited.fill(false, 0, result.length);
+        for(let i=0; i < result.length; i++){
+          this.checkIsFavorited(result[i].recipeId, i);
+        }
       }
      )
     this.welcome=this.accountService.currentAccountLogedIn;
     this.account=this.accountService.currentAccount;
     console.log(this.accountService.currentAccount);
+    console.log(this.isFavorited);
+   
   // this.favoriteService.getFavoritesByAccountId(this.accountService.currentAccount.id).subscribe(
   //   (result)=>{
   //     // let accountFavRecipes:
@@ -53,6 +60,15 @@ constructor(private spoonacualarService:SpoonacualarService,private accountServi
   //   }
   // );
 
+  }
+  checkIsFavorited(recipeId:number, index:number){
+    for(let i=0; i < this.accountFavorites.length; i++){
+      this.accountFavoritesIds.push(this.accountFavorites[i].recipeId);
+    }
+    if (this.accountFavoritesIds.includes(recipeId)){
+      this.isFavorited[index] = true;
+    }
+    
   }
 
   // toggleDetails(){
@@ -208,11 +224,12 @@ constructor(private spoonacualarService:SpoonacualarService,private accountServi
       
     // }
   
-    addToFavorites(recipeId:number, accountId:number){
+    addToFavorites(recipeId:number, accountId:number, index:number){
       this.favoriteService.addALLToFavorites(recipeId, accountId).subscribe(
         (result) => {
           console.log(result);
           this.accountFavorites.push(result);
+          this.isFavorited[index] = true;
         }
       )
     }

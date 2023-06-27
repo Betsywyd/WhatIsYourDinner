@@ -16,12 +16,16 @@ export class RecipeDetailsComponent implements OnInit{
   // analyzedInstructionsList: AnalyzedInstructions[]=[];
   // steps:Step[]=[];
   displaySavedRecipe:SavedRecipe={} as SavedRecipe;
+  instructions:string[] = [];
 
   constructor(private spoonacualarService:SpoonacualarService,private accountService:AccountService,private savedRecipeService:SavedRecipeService){
    this.savedRecipeService.getSavedRecipeById(this.displayRecipe.id).subscribe(
     (result:SavedRecipe)=>{
       this.displaySavedRecipe=result;
-
+      let inst:string[] = this.displaySavedRecipe.analizedInstructions.split(",");
+      for(let i = 0; i < inst.length; i++){
+        this.instructions.push(inst[i]);
+      }
     }
    )
     
