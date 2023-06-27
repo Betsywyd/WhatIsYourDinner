@@ -22,7 +22,7 @@
 
             <!-- <button (click)=" getRecipeDetails(r.id)"><img src={{r.image}}><p class="desc">{{r.title}}</p></button><br><br> -->
             <div class="gallery">
-            <button (click)=" displayDetails(r.id)" class="clearbutton"><img style="width: 80%; margin:auto;"  src={{r.image}}><br><p>{{r.title}}</p></button><br>
+            <button (click)=" displayDetails(r.id)"  class="clearbutton"><img style="width: 80%; margin:auto;"  src={{r.image}}><br><p>{{r.title}}</p></button><br>
             </div>
         
         </div>
@@ -31,7 +31,8 @@
    
 <!-- </div> -->
     <button *ngIf="showRecipeDetails"  (click)="backRecipe()">⬅️Back</button>  
-    <app-recipe-details  *ngIf="showRecipeDetails" [displayRecipe]="selectedSavedRecipe"></app-recipe-details>
+    <app-recipe-details  *ngIf="showRecipeDetails" [displayRecipe]="selectedSavedRecipe" 
+        [instructions]="instructions" [ingredients]="ingredients"></app-recipe-details>
 
 
   

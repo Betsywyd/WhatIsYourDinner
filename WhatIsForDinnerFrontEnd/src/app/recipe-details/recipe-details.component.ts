@@ -15,23 +15,33 @@ export class RecipeDetailsComponent implements OnInit{
   // ingredients:ExtendedIngredient[]=[];
   // analyzedInstructionsList: AnalyzedInstructions[]=[];
   // steps:Step[]=[];
-  displaySavedRecipe:SavedRecipe={} as SavedRecipe;
-  instructions:string[] = [];
+  
+  
+  @Input()  displayRecipe:SavedRecipe={} as SavedRecipe;
+  @Input()  instructions:string[] = [];
+  @Input() ingredients:string[] = [];
+  // instructions:string[] = this.displayRecipe.analizedInstructions.split(",");
 
   constructor(private spoonacualarService:SpoonacualarService,private accountService:AccountService,private savedRecipeService:SavedRecipeService){
-   this.savedRecipeService.getSavedRecipeById(this.displayRecipe.id).subscribe(
-    (result:SavedRecipe)=>{
-      this.displaySavedRecipe=result;
-      let inst:string[] = this.displaySavedRecipe.analizedInstructions.split(",");
-      for(let i = 0; i < inst.length; i++){
-        this.instructions.push(inst[i]);
-      }
-    }
-   )
+    
+    console.log(this.displayRecipe);
+    console.log(this.instructions);
     
   }
 
+  
   ngOnInit(): void {
+
+    console.log(this.instructions);
+    // this.savedRecipeService.getSavedRecipeById(this.displayRecipe.id).subscribe(
+    //  (result:SavedRecipe)=>{
+    //    this.displayRecipe=result;
+      //  let inst:string[] = this.displayRecipe.analizedInstructions.split(",");
+      //  for(let i = 0; i < inst.length; i++){
+      //    this.instructions.push(inst[i]);
+      //  }
+    //  }
+    //)
     // this.spoonacualarService.GetExtendedingredients(this.displayRecipe.id).subscribe(
     //   (result:ExtendedIngredient[])=>{
     //     this.ingredients=result;
@@ -53,7 +63,6 @@ export class RecipeDetailsComponent implements OnInit{
     //  )
   }
 
-  @Input()  displayRecipe:SavedRecipe={} as SavedRecipe;
              
             // displayRecipe:Recipe={} as Recipe;
             

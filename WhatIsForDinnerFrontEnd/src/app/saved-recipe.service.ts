@@ -10,6 +10,7 @@ export class SavedRecipeService {
 url:string="https://localhost:7114/api/SavedRecipes";
 // https://localhost:7114/api/SavedRecipes/RecipeId/3
 
+  displaySavedRecipe:SavedRecipe = {} as SavedRecipe;
   constructor(private http:HttpClient) { }
 
   getAllSavedRecipe():Observable<SavedRecipe[]>{
