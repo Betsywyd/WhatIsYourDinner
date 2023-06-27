@@ -19,6 +19,8 @@ export class FavoriteComponent implements OnInit{
  showRecipeDetails:boolean=false;
  selectedRecipe: SavedRecipe={} as SavedRecipe;
  savedRecipeList:SavedRecipe[]=[];
+ instructions:string[] = [];
+ ingredients:string[] = [];
  
   constructor(private favoriteService:FavoritesService,private accountService:AccountService,private savedRecipeService:SavedRecipeService,private spoonacualarService:SpoonacualarService){};
   ngOnInit(): void {
@@ -62,6 +64,13 @@ export class FavoriteComponent implements OnInit{
     this.savedRecipeService.getSavedRecipeById(id).subscribe(
       (result:SavedRecipe)=>{
         this.selectedRecipe=result;
+        this.ingredients = result.ingredients.split("\n");
+          if(this.selectedRecipe.analizedInstructions !== undefined){
+          this.instructions = result.analizedInstructions.split("@");
+          }
+          else{
+            this.instructions = [];
+          }
       }
      
     )

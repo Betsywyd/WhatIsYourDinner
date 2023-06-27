@@ -24,7 +24,7 @@ selectedRecipe:Recipe={} as Recipe;
 accountFavorites:Favorite[]=[];
 accountFavoritesIds:number[] = [];
 account:Account={} as Account;
-// savedRecipeId:number=-1;
+
 checkExist:boolean=false;
 
 savedRecipeList:SavedRecipe[]=[];
@@ -32,95 +32,73 @@ comparedRecipeIds:number[] = [];
 compareMaximum:number = 4;
 compareIsMaxed:boolean = false; 
 isCompared:boolean[] = [];
-// showDetails:boolean = false;
 isFavorited:boolean[] = [];
 instructions:string[] = [];
 ingredients:string[] = [];
+favoritedRecipes:SavedRecipe[] = [];
 
 constructor(private spoonacualarService:SpoonacualarService,private accountService:AccountService,private favoriteService:FavoritesService, private router:Router,private savedRecipeService:SavedRecipeService){}
   ngOnInit(): void {
+    this.favoriteService.getAllFavorites().subscribe(
+      (result) => {
+        this.accountFavorites = result;
+        console.log(this.accountFavorites);
+      }
+    )
     this.savedRecipeService.getAllSavedRecipe().subscribe(
       (result:SavedRecipe[])=>{
         this.savedRecipeList=result;
         this.isCompared.fill(false, 0, result.length);
-        this.isFavorited.fill(false, 0, result.length);
-        for(let i=0; i < result.length; i++){
-          this.checkIsFavorited(result[i].recipeId, i);
-          console.log(this.isFavorited[i])
-        }
+
+        // this.isFavorited.fill(false, 0, result.length);
+
+        // for(let i=0; i < result.length; i++){
+        //   this.checkIsFavorited(result[i].recipeId, i);
+        // }
       }
      )
     this.welcome=this.accountService.currentAccountLogedIn;
     this.account=this.accountService.currentAccount;
-    console.log(this.accountService.currentAccount);
-    
-   
-  // this.favoriteService.getFavoritesByAccountId(this.accountService.currentAccount.id).subscribe(
-  //   (result)=>{
-  //     // let accountFavRecipes:
+
+
+  }
+
+  checkIsFavorited(recipeId:number){
+    let check:boolean = false;
+    this.savedRecipeService.getAllSavedRecipe().subscribe(
+      (result) => {
+        this.favoritedRecipes = result;
+        for(let i =0; i < this.favoritedRecipes.length; i++){
+          if(this.favoritedRecipes[i].recipeId == recipeId){
+            check = true;
+          }
+        }
+      }
+    );
       
-  //     // this.accountFavorites=result;
+      
+      return check;
+    }
+  
+  // checkIsFavorited(recipeId:number, index:number){
+  //   for(let i=0; i < this.accountFavorites.length; i++){
+  //     this.accountFavoritesIds.push(this.accountFavorites[i].recipeId);
   //   }
-  // );
-
-  }
-  checkIsFavorited(recipeId:number, index:number){
-    for(let i=0; i < this.accountFavorites.length; i++){
-      this.accountFavoritesIds.push(this.accountFavorites[i].recipeId);
-    }
-    if (this.accountFavoritesIds.includes(recipeId)){
-      this.isFavorited[index] = true;
-    }
-    
-  }
-
-  // toggleDetails(){
-  //   this.showDetails = true;
+  //   if (this.accountFavoritesIds.includes(recipeId)){
+  //     this.isFavorited[index] = true;
+  //   }
+  //   console.log(this.accountFavoritesIds);
   // }
     
-    getRecipe():void{
+  getRecipe():void{
       this.spoonacualarService.searchRecipe(this.input).subscribe(
         (result:RecipeSearchResult)=>{
           this.results=result.results;
-          console.log(result);
+          
         }
       );
   
-    }
-
-    // getRecipeDetails(id:number){
-
-    //   this.spoonacualarService.getRecipe(id).subscribe(
-    //     (result:Recipe)=>{
-    //       this.selectedRecipe=result;
-    //       this.showRecipeDetails=true;
-    //     }
-    //   )
-    //   this.savedRecipeService.PostSavedRecipeByRecipeId(id).subscribe(
-    //     (result)=>{
-    //       this.savedRecipeList.push(result);
-    //       this.selectedSavedRecipe=result;
-    //     }
-    //    )
-    // }
-
-    // displayDetails(recipeId:number){
-    //  this.savedRecipeService.PostSavedRecipeByRecipeId(recipeId).subscribe(
-    //   (result)=>{
-    //     this.savedRecipeList.push(result);
-    //     this.selectedSavedRecipe=result;
-    //     this.savedRecipeService.getAllSavedRecipe().subscribe(
-    //       (result:SavedRecipe[])=>{
-    //         this.savedRecipeList=result;
-    //       }
-    //      )
-
-    //   }
-    //  )
-    //  this.showRecipeDetails=true;
-    // }
-
-
+  }
 
 
     displayDetails(recipeId:number){
@@ -172,7 +150,7 @@ constructor(private spoonacualarService:SpoonacualarService,private accountServi
       else if(this.comparedRecipeIds.length = this.compareMaximum){
         this.compareIsMaxed = true; 
       }
-      console.log(this.comparedRecipeIds);
+      // console.log(this.comparedRecipeIds);
       
     }
 
@@ -195,46 +173,6 @@ constructor(private spoonacualarService:SpoonacualarService,private accountServi
        return this.accountService.currentAccount.name;
        console.log(this.accountService.currentAccount.name)
       }
-
-      
-
-    // addToFavorites(recipeId:number){
-    //   // checkIfExistInSavedRecipe(recipeId:number){
-       
-    //     this.spoonacualarService.CheckExistInSavedRecipe(recipeId).subscribe(
-    //       (result:boolean)=>{
-    //        this.checkExist=result;
-    //        this.spoonacualarService.GetSavedRecipeIdByRecipeId(recipeId).subscribe(
-    //         (result:number)=>{this.savedRecipeId=result}
-    //       );
-    //       if(this.checkExist==true){
-    //         let newFavorite:Favorite ={id:0,accountId:this.accountService.currentAccount.id,recipeId:this.savedRecipeId,account:null};//this recipeId is savedRecipeId;
-    //         console.log(this.accountService.currentAccount.id);
-    //         console.log(this.savedRecipeId);
-      
-    //         console.log(newFavorite);
-    //         console.log("test");
-    //         this.favoriteService.addFavorite(newFavorite).subscribe(
-    //         (result:Favorite)=>{
-    //           console.log("test");
-    //           this.accountFavorites.push(newFavorite);
-    //           console.log(result);
-    //         }
-    //        )
-    //       }
-    //       else{
-    //       this.spoonacualarService.FillSavedRecipeDb(recipeId).subscribe(
-            
-    //         ()=>{
-    //           console.log("test");
-    //         }
-    //       )       
-    //       this.addToFavorites(recipeId);
-    //       }
-    //       }
-    //     );
-      
-    // }
   
     addToFavorites(recipeId:number, accountId:number, index:number){
       this.favoriteService.addALLToFavorites(recipeId, accountId).subscribe(
@@ -242,13 +180,11 @@ constructor(private spoonacualarService:SpoonacualarService,private accountServi
           console.log(result);
           this.accountFavorites.push(result);
           this.isFavorited[index] = true;
+          //console.log(this.accountFavorites);
         }
       )
     }
 
-    // hideRecipeDetails(){
-    //   this.showDetails=false;
-    // }
 
     backRecipe(){
       this.showRecipeDetails=false;

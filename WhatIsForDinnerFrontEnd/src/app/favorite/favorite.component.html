@@ -18,6 +18,7 @@
 </div>
 <div>
     <button *ngIf="showRecipeDetails"  (click)="backRecipe()">⬅️Back</button>  
-    <app-recipe-details  *ngIf="showRecipeDetails" [displayRecipe]="selectedRecipe"></app-recipe-details>
+    <app-recipe-details  *ngIf="showRecipeDetails" [displayRecipe]="selectedRecipe" 
+    [instructions]="instructions" [ingredients]="ingredients"></app-recipe-details>
     </div>
 

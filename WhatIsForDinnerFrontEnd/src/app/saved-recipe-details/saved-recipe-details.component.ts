@@ -9,6 +9,10 @@ import { SavedRecipeService } from '../saved-recipe.service';
 })
 export class SavedRecipeDetailsComponent implements OnInit{
 
+  @Input()  displayRecipe:SavedRecipe={} as SavedRecipe;
+  @Input()  instructions:string[] = [];
+  @Input() ingredients:string[] = [];
+  
   constructor(private savedRecipeService:SavedRecipeService ){}
   ngOnInit(): void {
     this.savedRecipeService.getSavedRecipeById(this.displayRecipe.id).subscribe(
@@ -22,5 +26,4 @@ export class SavedRecipeDetailsComponent implements OnInit{
 
 
 
-  @Input()  displayRecipe:SavedRecipe={} as SavedRecipe;
 }
