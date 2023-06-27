@@ -81,7 +81,7 @@ constructor(private spoonacualarService:SpoonacualarService,private accountServi
       this.spoonacualarService.searchRecipe(this.input).subscribe(
         (result:RecipeSearchResult)=>{
           this.results=result.results;
-          console.log(result);
+          
         }
       );
   
