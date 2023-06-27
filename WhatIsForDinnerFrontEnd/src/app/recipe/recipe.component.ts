@@ -43,12 +43,14 @@ constructor(private spoonacualarService:SpoonacualarService,private accountServi
       (result) => {
         this.accountFavorites = result;
         console.log(this.accountFavorites);
+        
       }
     )
     this.savedRecipeService.getAllSavedRecipe().subscribe(
       (result:SavedRecipe[])=>{
         this.savedRecipeList=result;
         this.isCompared.fill(false, 0, result.length);
+        
         // this.isFavorited.fill(false, 0, result.length);
 
         // for(let i=0; i < result.length; i++){
@@ -65,16 +67,12 @@ constructor(private spoonacualarService:SpoonacualarService,private accountServi
 
   checkIsFavorited(recipeId:number){
     let check:boolean = false;
-    this.savedRecipeService.getAllSavedRecipe().subscribe(
-      (result) => {
-        this.favoritedRecipes = result;
-        for(let i =0; i < this.favoritedRecipes.length; i++){
-          if(this.favoritedRecipes[i].recipeId == recipeId){
+    
+        for(let i =0; i < this.savedRecipeList.length; i++){
+          if(this.savedRecipeList[i].recipeId == recipeId){
             check = true;
           }
         }
-      }
-    );
       
       
       return check;
