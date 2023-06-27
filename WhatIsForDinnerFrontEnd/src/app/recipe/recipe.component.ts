@@ -30,7 +30,7 @@ savedRecipeList:SavedRecipe[]=[];
 comparedRecipeIds:number[] = [];
 compareMaximum:number = 4;
 compareIsMaxed:boolean = false; 
-isCompared:boolean = false;
+isCompared:boolean[] = [];
 // showDetails:boolean = false;
 
 
@@ -39,6 +39,7 @@ constructor(private spoonacualarService:SpoonacualarService,private accountServi
     this.savedRecipeService.getAllSavedRecipe().subscribe(
       (result:SavedRecipe[])=>{
         this.savedRecipeList=result;
+        this.isCompared.fill(false, 0, result.length);
       }
      )
     this.welcome=this.accountService.currentAccountLogedIn;
@@ -134,11 +135,11 @@ constructor(private spoonacualarService:SpoonacualarService,private accountServi
 
 
     
-    addRecipeToCompareList(recipeId:number){
+    addRecipeToCompareList(recipeId:number, index:number){
       if(this.comparedRecipeIds.length < this.compareMaximum){
         this.comparedRecipeIds.push(recipeId);
         this.spoonacualarService.comparedRecipeIds = this.comparedRecipeIds;
-        this.isCompared = true;
+        this.isCompared[index] = true;
       }
       else if(this.comparedRecipeIds.length = this.compareMaximum){
         this.compareIsMaxed = true; 
@@ -147,11 +148,11 @@ constructor(private spoonacualarService:SpoonacualarService,private accountServi
       
     }
 
-    removeRecipeFromCompareList(recipeId:number){
+    removeRecipeFromCompareList(recipeId:number, index:number){
       for(let i = 0; i < this.comparedRecipeIds.length; i++){
         if(recipeId = this.comparedRecipeIds[i]){
           this.comparedRecipeIds.splice(i);
-          this.isCompared = false;
+          this.isCompared[index] = false;
         }
       }
     }
