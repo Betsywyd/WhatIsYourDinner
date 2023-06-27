@@ -46,13 +46,14 @@ constructor(private spoonacualarService:SpoonacualarService,private accountServi
         this.isFavorited.fill(false, 0, result.length);
         for(let i=0; i < result.length; i++){
           this.checkIsFavorited(result[i].recipeId, i);
+          console.log(this.isFavorited[i])
         }
       }
      )
     this.welcome=this.accountService.currentAccountLogedIn;
     this.account=this.accountService.currentAccount;
     console.log(this.accountService.currentAccount);
-    console.log(this.isFavorited);
+    
    
   // this.favoriteService.getFavoritesByAccountId(this.accountService.currentAccount.id).subscribe(
   //   (result)=>{
