@@ -50,7 +50,11 @@ constructor(private spoonacualarService:SpoonacualarService,private accountServi
       (result:SavedRecipe[])=>{
         this.savedRecipeList=result;
         this.isCompared.fill(false, 0, result.length);
+<<<<<<< HEAD
         
+=======
+
+>>>>>>> 1f9e223708be0c034f44048dd81afa04130ac526
         // this.isFavorited.fill(false, 0, result.length);
 
         // for(let i=0; i < result.length; i++){
@@ -60,8 +64,7 @@ constructor(private spoonacualarService:SpoonacualarService,private accountServi
      )
     this.welcome=this.accountService.currentAccountLogedIn;
     this.account=this.accountService.currentAccount;
-    // console.log(this.accountService.currentAccount);
-    // console.log(this.isFavorited);
+
 
   }
 
