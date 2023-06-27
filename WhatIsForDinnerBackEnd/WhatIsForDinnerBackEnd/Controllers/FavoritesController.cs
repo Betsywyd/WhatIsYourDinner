@@ -220,7 +220,7 @@ namespace WhatIsForDinnerBackEnd.Controllers
                 string ingredients = "";
                 for (int i = 0; i < IngredientNames.Count; i++)
                 {
-                    ingredients += (i + 1) + ". " + IngredientNames[i] + ": " + IngredientAmounts[i] + IngredientUnits[i] + ".  " + "\n";
+                    ingredients += IngredientNames[i] + ": " + " " + IngredientAmounts[i] + " " + IngredientUnits[i] + "\n";
                 }
                 sr.Ingredients = ingredients;
                 sr.Image = recipe.image;
@@ -233,7 +233,7 @@ namespace WhatIsForDinnerBackEnd.Controllers
                     List<string> steps = recipe.analyzedInstructions[0].steps.Select(s => s.step).ToList();
                     for (int i = 0; i < steps.Count; i++)
                     {
-                        sr.AnalizedInstructions += (i + 1) + ". " + steps[i] + "  ";
+                        sr.AnalizedInstructions += steps[i] + "@";
                     }
                     //sr.AnalizedInstructions = string.Join(",", steps);
                 }

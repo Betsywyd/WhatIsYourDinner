@@ -34,6 +34,8 @@ compareIsMaxed:boolean = false;
 isCompared:boolean[] = [];
 // showDetails:boolean = false;
 isFavorited:boolean[] = [];
+instructions:string[] = [];
+ingredients:string[] = [];
 
 constructor(private spoonacualarService:SpoonacualarService,private accountService:AccountService,private favoriteService:FavoritesService, private router:Router,private savedRecipeService:SavedRecipeService){}
   ngOnInit(): void {
@@ -121,6 +123,7 @@ constructor(private spoonacualarService:SpoonacualarService,private accountServi
 
 
     displayDetails(recipeId:number){
+      
       let savedRecipeListRecipeIds:number[]=[];
       for(let i=0;i<this.savedRecipeList.length;i++){
         savedRecipeListRecipeIds.push(this.savedRecipeList[i].recipeId);
@@ -129,6 +132,13 @@ constructor(private spoonacualarService:SpoonacualarService,private accountServi
        this.savedRecipeService.GetSavedRecipeByRecipeId(recipeId).subscribe(
         (result:SavedRecipe)=>{
           this.selectedSavedRecipe=result;
+          this.ingredients = result.ingredients.split("\n");
+          if(this.selectedSavedRecipe.analizedInstructions !== undefined){
+          this.instructions = result.analizedInstructions.split("@");
+          }
+          else{
+            this.instructions = [];
+          }
         }
        )
       }
@@ -140,6 +150,7 @@ constructor(private spoonacualarService:SpoonacualarService,private accountServi
          this.savedRecipeService.getAllSavedRecipe().subscribe(
            (result:SavedRecipe[])=>{
              this.savedRecipeList=result;
+             
            }
           )
  

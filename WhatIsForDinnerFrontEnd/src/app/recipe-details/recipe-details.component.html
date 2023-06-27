@@ -10,12 +10,15 @@
 <p>cookingMinutes:{{displayRecipe.cookingMinutes}}</p>
 <p>healthScore:{{displayRecipe.healthScore}}</p> -->
 
-<p>ReadyInMinute: {{displayRecipe.readyInMinutes}}</p>
+<p>Total Time: {{displayRecipe.readyInMinutes}} min</p>
 <p>Servings: {{displayRecipe.servings}}</p>
 </div>
 <div class="item2">
 <h3>Ingredients: </h3>
-<p>{{displayRecipe.ingredients}}</p>
+    <div *ngFor="let n of ingredients">
+        <p>{{n}}</p>
+
+    </div>
 </div>
 <!-- <div *ngFor="let d of ingredients;index as i"> -->
  
@@ -28,9 +31,14 @@
 <p>{{displayRecipe.instructions}}</p> -->
 <div class="item3">
 <h3>Instructions:</h3>
-<div *ngFor="let n of instructions; index as i">
-    <p>{{n[i]}}</p>
+<div *ngFor="let n of instructions;index as i">
+    <p>{{n}}</p><br>
 </div>
+<!-- <div *ngIf="displayRecipe !== undefined">
+    <div *ngFor="let n of displayRecipe.analizedInstructions.split(","); index as i">
+        <p>{{n[i]}}</p>
+    </div>
+</div> -->
 <!-- <ol>
 <li *ngFor="let s of steps">{{s.step}} </li>
 </ol> -->
