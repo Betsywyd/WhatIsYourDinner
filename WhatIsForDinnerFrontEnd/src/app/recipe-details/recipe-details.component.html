@@ -27,8 +27,10 @@
 <!-- <h3>Instructions:</h3>
 <p>{{displayRecipe.instructions}}</p> -->
 <div class="item3">
-<h3>analyzedInstructions:</h3>
-<p>{{displayRecipe.analizedInstructions}}</p>
+<h3>Instructions:</h3>
+<div *ngFor="let n of instructions; index as i">
+    <p>{{n[i]}}</p>
+</div>
 <!-- <ol>
 <li *ngFor="let s of steps">{{s.step}} </li>
 </ol> -->

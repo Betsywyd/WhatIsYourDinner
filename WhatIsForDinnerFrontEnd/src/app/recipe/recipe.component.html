@@ -15,7 +15,8 @@
             <!-- <img src={{r.image}}> -->
             <button  *ngIf="!compareIsMaxed && !isCompared[i]" (click)="addRecipeToCompareList(r.id, i)">Compare</button>
             <button *ngIf="isCompared[i]" (click)="removeRecipeFromCompareList(r.id, i)">Stop Comparing</button>
-            <button (click)="addToFavorites(r.id, account.id)">Add To Favorite</button>
+            <button *ngIf="!isFavorited[i]" (click)="addToFavorites(r.id, account.id, i)">Add To Favorite</button>
+            <p *ngIf="isFavorited[i]">❤️</p>
         
             <!-- <button (click)="displayDetails(r.id)"><img src={{r.image}}><p class="desc">{{r.title}}</p></button> -->
 
