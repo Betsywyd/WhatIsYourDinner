@@ -7,13 +7,17 @@
 <div  *ngIf="!showRecipeDetails" >
     <div class="flex">
     <div *ngFor="let f of favoritesSavedRecipes; index as i" style="width: 24%; border-style:ridge;">
-    <button (click)="getRecipeDetails(f.id)" class="clearbutton"><img style="width: 80%; margin:auto;"  src={{f.image}}><br><p>{{f.title}}</p></button><br>
+        <div class="gallery">
+    <button (click)="getRecipeDetails(f.id)" class="clearbutton"><img style="width: 80%; margin:auto;"  src={{f.image}}><br><p>{{f.title}} </p></button>
+    </div>
+    <button (click)="removeFavorite(f.id,i)">🗑️❌</button>
+   
      
 </div>
 </div>
 </div>
 <div>
-    <button *ngIf="showRecipeDetails"  (click)="backRecipe()">Get Back Recipes</button>  
+    <button *ngIf="showRecipeDetails"  (click)="backRecipe()">⬅️Back</button>  
     <app-recipe-details  *ngIf="showRecipeDetails" [displayRecipe]="selectedRecipe"></app-recipe-details>
     </div>
 

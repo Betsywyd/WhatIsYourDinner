@@ -5,17 +5,16 @@
 <div *ngFor="let s of savedRecipeList; index as i" style="width: 24%; border-style:ridge;" >
 <!-- <p>Title:{{s.title}}</p><button (click)="getRecipeDetails(s.id)">See Details</button>
 <img src={{s.image}}> -->
-
-<!-- <button (click)=" getRecipeDetails(s.id)" class="clearbutton"><img style="max-width: 50%"  src={{s.image}}><br><p>{{s.title}}</p></button><br> -->
-
+<div class="gallery">
 <button (click)=" getRecipeDetails(s.id)" class="clearbutton"><img style="width: 80%; margin:auto;"  src={{s.image}}><br><p>{{s.title}}</p></button><br>
-<button (click)="addToFavorites(s.id)">Add To Favorite</button>
+</div>
+<button (click)="addToFavorites(s.id,account.id)" >Add To Favorite</button>
 
 </div>
 </div>
 </div>
 
 <div>
-<button *ngIf="showRecipeDetails"  (click)="backRecipe()">Get Back Recipes</button>  
+<button *ngIf="showRecipeDetails"  (click)="backRecipe()">⬅️Back</button>  
 <app-recipe-details  *ngIf="showRecipeDetails" [displayRecipe]="selectedRecipe"></app-recipe-details>
 </div> 

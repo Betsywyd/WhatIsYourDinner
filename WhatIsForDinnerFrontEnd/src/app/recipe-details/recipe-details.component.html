@@ -1,5 +1,7 @@
+<div class="grid-container">
+<div class="item1">
 <h3>{{displayRecipe.title}}</h3>
-<p>{{displayRecipe.id}}</p>
+<!-- <p>{{displayRecipe.id}}</p> -->
 <img src={{displayRecipe.image}}>
 <!-- <p>vegetarian:{{displayRecipe.vegetarian}}</p>
 <p>glutenFree:{{displayRecipe.glutenFree}}</p>
@@ -8,9 +10,13 @@
 <p>cookingMinutes:{{displayRecipe.cookingMinutes}}</p>
 <p>healthScore:{{displayRecipe.healthScore}}</p> -->
 
-
+<p>ReadyInMinute: {{displayRecipe.readyInMinutes}}</p>
+<p>Servings: {{displayRecipe.servings}}</p>
+</div>
+<div class="item2">
 <h3>Ingredients: </h3>
 <p>{{displayRecipe.ingredients}}</p>
+</div>
 <!-- <div *ngFor="let d of ingredients;index as i"> -->
  
 <!-- <p>{{i+1}}: <span>{{d.name}}</span> ,<span>{{d.amount}} {{d.unit}}</span></p> -->
@@ -20,14 +26,14 @@
 
 <!-- <h3>Instructions:</h3>
 <p>{{displayRecipe.instructions}}</p> -->
-
+<div class="item3">
 <h3>analyzedInstructions:</h3>
 <p>{{displayRecipe.analizedInstructions}}</p>
 <!-- <ol>
 <li *ngFor="let s of steps">{{s.step}} </li>
 </ol> -->
-
-
+</div>
+</div>
 
 
 

@@ -22,8 +22,11 @@
 
   .flex{
     display:flex;
-    flex-flow: wrap;
-    
+    flex-flow: wrap;  
+}
+
+div.gallery:hover {
+  border: 1px solid #777;
 }
 
 .row{

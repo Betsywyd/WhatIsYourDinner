@@ -73,4 +73,12 @@ export class FavoriteComponent implements OnInit{
   backRecipe(){
     this.showRecipeDetails=false;
   }
+
+  removeFavorite(savedRecipeId:number,index:number){
+    this.favoriteService.DeleteFavoriteBySavedRecipeId(savedRecipeId).subscribe(
+      ()=>{
+        this.favoritesSavedRecipes.splice(index,1);
+      }
+    )
+  }
 }

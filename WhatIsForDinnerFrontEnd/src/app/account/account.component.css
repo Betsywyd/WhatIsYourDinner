@@ -1,3 +1,7 @@
+body {
+  background: rgb(148, 212, 235);
+ }
+
 .button {
     background-color: #aad1c3; 
     border: none;
@@ -50,3 +54,4 @@
     padding: 16px;
     /* background-color: white; */
  }
+

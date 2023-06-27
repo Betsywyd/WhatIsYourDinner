@@ -6,6 +6,7 @@ import { Recipe } from '../recipe';
 import { Favorite } from '../favorite';
 import { AccountService } from '../account.service';
 import { Account } from '../account';
+import { FavoritesService } from '../favorites.service';
 
 @Component({
   selector: 'app-saved-recipe',
@@ -19,9 +20,11 @@ showRecipeDetails:boolean=false;
 selectedRecipe:SavedRecipe={} as SavedRecipe;
 // selectedRecipe:Recipe={} as Recipe;
 account:Account={} as Account;
+accountFavorites:Favorite[]=[];
+existInFavorite:boolean=false;
+accountSavedRecipes:SavedRecipe[]=[];
 
-
-constructor(private savedRecipeService:SavedRecipeService,private spoonacualarService:SpoonacualarService,private accountService:AccountService){}
+constructor(private savedRecipeService:SavedRecipeService,private spoonacualarService:SpoonacualarService,private accountService:AccountService,private favoriteService:FavoritesService){}
 
   ngOnInit(): void {
   //  for(let i=0;i<20;i++)
@@ -71,14 +74,35 @@ constructor(private savedRecipeService:SavedRecipeService,private spoonacualarSe
     this.showRecipeDetails=true;      
   }
 
-  addToFavorites(savedRecipeId:number){
-   
-    let newFavorite:Favorite ={id:0,accountId:this.accountService.currentAccount.id,recipeId:this.selectedRecipe.recipeId,account:null};
+  addToFavorites(savedRecipeId:number, accountId:number){
+  
+   this.favoriteService.PostFavoriteBySavedRecipeId(savedRecipeId,accountId).subscribe(
+    (result)=>{
+      this.accountFavorites.push(result);
+    }
+   )
+
 
   }
 
   backRecipe(){
     this.showRecipeDetails=false;
   }
+  
+  // checkInFavorites(savedRecipeId:number, accountId:number){
+  // this.favoriteService.getAccountFav(accountId).subscribe(
+  //   (result:SavedRecipe[])=>{
+  //     this.accountSavedRecipes=result;
+  //   }
+  // )
+  // let accountSavedRecipesIds:number[]=[];
+  // for(let i=0;i<this.accountSavedRecipes.length;i++){
+  //  accountSavedRecipesIds.push(this.accountSavedRecipes[i].recipeId)
+  // }
+  // }
+
+
+
+
 
 }

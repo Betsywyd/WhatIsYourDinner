@@ -1,0 +1,25 @@
+
+.item1 { grid-area: image; }
+.item2 { grid-area: ingredients; }
+.item3 { grid-area: steps; }
+
+
+.grid-container {
+  display: grid;
+  grid-template-areas:
+    'image ingredients'
+ 
+    'image steps';
+  gap: 30px;
+  /* background-color: #2196F3; */
+  padding: 30px;
+}
+
+.grid-container > div {
+  
+  background-color: rgba(213, 244, 213, 0.8);
+  text-align: left;
+  padding: 20px 30px;
+  font-size: 20px;
+  text-size-adjust: auto;
+}

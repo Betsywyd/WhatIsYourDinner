@@ -40,11 +40,20 @@ export class FavoritesService {
   // }
  
   getAccountFav(accountId:number):Observable<SavedRecipe[]>{
-    return this.http.get<SavedRecipe[]>(this.url+"/AccountFav/"+accountId)
+    return this.http.get<SavedRecipe[]>(this.url+"/AccountFav/"+accountId);
   }
 
   addALLToFavorites(recipeId:number, accountId:number):Observable<Favorite>{
-    return this.http.post<Favorite>(this.url + "/CreateFavorite/" + recipeId + "?accountId=" +accountId, {})
+    return this.http.post<Favorite>(this.url + "/CreateFavorite/" + recipeId + "?accountId=" +accountId, {});
+  }
+
+  DeleteFavoriteBySavedRecipeId(savedRecipeId:number):Observable<any>{
+    return this.http.delete<any>(this.url+"/SavedRecipe/" + savedRecipeId);
+  }
+  // [HttpPost("{savedRecipeId}")]
+
+  PostFavoriteBySavedRecipeId( savedRecipeId:number, accountId:number):Observable<Favorite>{
+    return this.http.post<Favorite>(this.url+"/CreateFavoriteBySavedRecipeId/"+savedRecipeId+"?accountId=" +accountId, {});
   }
 
 }
