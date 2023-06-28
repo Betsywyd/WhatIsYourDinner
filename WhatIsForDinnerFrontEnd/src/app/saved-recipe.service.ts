@@ -2,12 +2,13 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { SavedRecipe } from './saved-recipe';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment.development';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SavedRecipeService {
-url:string="https://localhost:7114/api/SavedRecipes";
+url:string=`${environment.apiUrl}/api/SavedRecipes`;
 // https://localhost:7114/api/SavedRecipes/RecipeId/3
 
   displaySavedRecipe:SavedRecipe = {} as SavedRecipe;

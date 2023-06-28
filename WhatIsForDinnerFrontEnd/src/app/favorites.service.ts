@@ -4,13 +4,14 @@ import { Observable } from 'rxjs';
 import { Favorite } from './favorite';
 import { Recipe, Result } from './recipe';
 import { SavedRecipe } from './saved-recipe';
+import { environment } from 'src/environments/environment.development';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FavoritesService {
 
-  url: string="https://localhost:7114/api/Favorites";
+  url: string=`${environment.apiUrl}/api/Favorites`;
 
  
   constructor(private http:HttpClient) { }

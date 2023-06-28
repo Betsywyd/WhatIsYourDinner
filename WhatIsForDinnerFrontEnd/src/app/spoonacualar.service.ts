@@ -3,12 +3,13 @@ import { HttpClient } from '@angular/common/http';
 import {  AnalyzedInstructions, ExtendedIngredient, Recipe, RecipeSearchResult, Result, Step } from './recipe';
 import { Ingredient } from './ingredient';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment.development';
 @Injectable({
   providedIn: 'root'
 })
 export class SpoonacualarService {
 
-  url: string = "https://localhost:7114/api/Spoonacular";
+  url: string = `${environment.apiUrl}/api/Spoonacular`;
 
  
 
