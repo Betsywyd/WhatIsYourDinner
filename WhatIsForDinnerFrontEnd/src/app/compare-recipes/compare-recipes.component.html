@@ -13,7 +13,7 @@
 </div>
 <div class="item2">
     <div class="item2">
-        <p>Servings: {{r.servings}}  Cost Per Serving: {{r.pricePerServing*.01 | currency}}</p>
+        <p>Servings: {{r.servings}} - Cost Per Serving: {{r.pricePerServing*.01 | currency}}</p>
         <p>Total Estimated Cost: {{r.pricePerServing*.01*r.servings | currency}}</p>
     <h2>Shopping List:</h2>
     <div *ngFor="let e of comparedRecipes[i].extendedIngredients; index as i" >
