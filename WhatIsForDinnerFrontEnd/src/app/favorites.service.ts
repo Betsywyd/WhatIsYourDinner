@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Favorite } from './favorite';
-import { Recipe } from './recipe';
+import { Recipe, Result } from './recipe';
 import { SavedRecipe } from './saved-recipe';
 
 @Injectable({
@@ -54,6 +54,10 @@ export class FavoritesService {
 
   PostFavoriteBySavedRecipeId( savedRecipeId:number, accountId:number):Observable<Favorite>{
     return this.http.post<Favorite>(this.url+"/CreateFavoriteBySavedRecipeId/"+savedRecipeId+"?accountId=" +accountId, {});
+  }
+
+  CheckIfResultIsFavorited(resultQuery:string, accountId:number):Observable<Result[]>{
+    return this.http.get<Result[]>(this.url+ "/ResultsAreFavorited/" + accountId + "/" + resultQuery);
   }
 
 }
