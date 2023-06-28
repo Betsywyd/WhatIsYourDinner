@@ -23,6 +23,8 @@ account:Account={} as Account;
 accountFavorites:Favorite[]=[];
 existInFavorite:boolean=false;
 accountSavedRecipes:SavedRecipe[]=[];
+instructions:string[] = [];
+ingredients:string[] = [];
 
 constructor(private savedRecipeService:SavedRecipeService,private spoonacualarService:SpoonacualarService,private accountService:AccountService,private favoriteService:FavoritesService){}
 
@@ -64,10 +66,22 @@ constructor(private savedRecipeService:SavedRecipeService,private spoonacualarSe
   //     ) 
   // }
 
+ 
+
+
+
+
   getRecipeDetails(id:number){
     this.savedRecipeService.getSavedRecipeById(id).subscribe(
       (result:SavedRecipe)=>{
         this.selectedRecipe=result;
+        this.ingredients = result.ingredients.split("\n");
+        if(this.selectedRecipe.analizedInstructions !== undefined){
+        this.instructions = result.analizedInstructions.split("@");
+        }
+        else{
+          this.instructions = [];
+        }
       }
      
     )
@@ -100,8 +114,7 @@ constructor(private savedRecipeService:SavedRecipeService,private spoonacualarSe
   //  accountSavedRecipesIds.push(this.accountSavedRecipes[i].recipeId)
   // }
   // }
-
-
+ 
 
 
 
