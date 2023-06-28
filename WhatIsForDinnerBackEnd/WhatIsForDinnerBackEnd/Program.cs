@@ -24,11 +24,7 @@ namespace WhatIsForDinnerBackEnd
                 options.AddPolicy("AllowAngularOrigins",
                 builder =>
                 {
-                    builder.WithOrigins(
-                                        "http://localhost:4200"
-                                        )
-                                        .AllowAnyHeader()
-                                        .AllowAnyMethod();
+                    builder.AllowAnyMethod().AllowAnyHeader().AllowAnyOrigin();
                 });
             });
 
@@ -47,6 +43,10 @@ namespace WhatIsForDinnerBackEnd
                 app.UseSwaggerUI();
             }
 
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
+
+
             app.UseHttpsRedirection();
 
             app.UseAuthorization();
@@ -54,6 +54,8 @@ namespace WhatIsForDinnerBackEnd
             app.MapControllers();
 
             app.Run();
+
+
         }
     }
 }
