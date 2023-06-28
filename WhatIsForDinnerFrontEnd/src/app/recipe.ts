@@ -52,6 +52,7 @@ export interface Result {
     image:     string;
     imageType: ImageType;
     nutrition: null;
+    isFavorited:boolean;
 }
 
 export enum ImageType {

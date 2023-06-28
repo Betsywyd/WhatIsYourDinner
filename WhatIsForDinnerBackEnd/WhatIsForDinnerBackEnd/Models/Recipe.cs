@@ -15,6 +15,7 @@ public class Result
     public string title { get; set; }
     public string image { get; set; }
     public string imageType { get; set; }
+    public bool isFavorited { get; set; } = false;
     public Nutrition nutrition { get; set; }
 }
 

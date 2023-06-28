@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query;
 using WhatIsForDinnerBackEnd.Models;
 
 namespace WhatIsForDinnerBackEnd.Controllers
@@ -266,6 +267,22 @@ namespace WhatIsForDinnerBackEnd.Controllers
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetFavorite", new { id = favorite.Id }, favorite);
+        }
+
+        [HttpGet("ResultsAreFavorited/{accountId}/{resultQuery}")]
+        public Result[] CheckIfResultIsFavorited(string resultQuery, int accountId)
+        {
+            Result[] result = spoonacularDAL.GetRecipeResult(resultQuery).results;
+            List<SavedRecipe> favorites = GetAccountFav(accountId);
+            for(int i = 0; i < result.Length; i++)
+            {
+                List<SavedRecipe> list = favorites.Where(fav => fav.RecipeId == result[i].id).ToList();
+                if (list.Count > 0) 
+                {
+                    result[i].isFavorited = true;
+                } 
+            }
+            return result;
         }
 
 

@@ -39,16 +39,20 @@ favoritedRecipes:SavedRecipe[] = [];
 
 constructor(private spoonacualarService:SpoonacualarService,private accountService:AccountService,private favoriteService:FavoritesService, private router:Router,private savedRecipeService:SavedRecipeService){}
   ngOnInit(): void {
-    this.favoriteService.getAllFavorites().subscribe(
-      (result) => {
-        this.accountFavorites = result;
-        console.log(this.accountFavorites);
-      }
-    )
+
+    
+    // this.favoriteService.getAllFavorites().subscribe(
+    //   (result) => {
+    //     this.accountFavorites = result;
+    //     console.log(this.accountFavorites);
+        
+    //   }
+    //)
     this.savedRecipeService.getAllSavedRecipe().subscribe(
       (result:SavedRecipe[])=>{
         this.savedRecipeList=result;
         this.isCompared.fill(false, 0, result.length);
+        
 
         // this.isFavorited.fill(false, 0, result.length);
 
@@ -63,22 +67,20 @@ constructor(private spoonacualarService:SpoonacualarService,private accountServi
 
   }
 
-  checkIsFavorited(recipeId:number){
-    let check:boolean = false;
-    this.savedRecipeService.getAllSavedRecipe().subscribe(
-      (result) => {
-        this.favoritedRecipes = result;
-        for(let i =0; i < this.favoritedRecipes.length; i++){
-          if(this.favoritedRecipes[i].recipeId == recipeId){
-            check = true;
-          }
-        }
-      }
-    );
+
+
+  // checkIsFavorited(recipeId:number){
+  //   let check:boolean = false;
+  //   for(let i =0; i < this.results.length; i++){
+  //     if(this.results[i].id == recipeId){
+            
+  //           check = true;
+  //         }
+  //       }
       
       
-      return check;
-    }
+  //     return check;
+  //   }
   
   // checkIsFavorited(recipeId:number, index:number){
   //   for(let i=0; i < this.accountFavorites.length; i++){
@@ -91,13 +93,19 @@ constructor(private spoonacualarService:SpoonacualarService,private accountServi
   // }
     
   getRecipe():void{
-      this.spoonacualarService.searchRecipe(this.input).subscribe(
-        (result:RecipeSearchResult)=>{
-          this.results=result.results;
-          
-        }
-      );
-  
+      // this.spoonacualarService.searchRecipe(this.input).subscribe(
+      //   (result:RecipeSearchResult)=>{
+      //     this.results=result.results;
+          // for(let i = 0; i < this.results.length; i++){
+          //   if(this.results[i].id )
+          // }
+      //   }
+      // );
+  this.favoriteService.CheckIfResultIsFavorited(this.input, this.account.id).subscribe(
+    (result) => {
+      this.results = result;
+    }
+  )
   }
 
 
@@ -174,13 +182,13 @@ constructor(private spoonacualarService:SpoonacualarService,private accountServi
        console.log(this.accountService.currentAccount.name)
       }
   
-    addToFavorites(recipeId:number, accountId:number, index:number){
+    addToFavorites(recipeId:number, accountId:number, searchResult:Result){
+      
+      searchResult.isFavorited = true;
       this.favoriteService.addALLToFavorites(recipeId, accountId).subscribe(
         (result) => {
           console.log(result);
-          this.accountFavorites.push(result);
-          this.isFavorited[index] = true;
-          //console.log(this.accountFavorites);
+          this.accountFavorites.push(result);  
         }
       )
     }
