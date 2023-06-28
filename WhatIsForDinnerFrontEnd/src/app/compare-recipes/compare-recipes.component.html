@@ -3,7 +3,7 @@
 
 <div *ngFor="let r of comparedRecipes; index as i" class="card" class="grid-container">
     <div class="item1">
-    <p>{{r.title}}</p>
+    <h2>{{r.title}}</h2>
     <img src={{r.image}}>
     <div *ngFor="let a of comparedRecipes[i].analyzedInstructions" class="container">
         <div *ngFor="let s of a.steps">
@@ -12,6 +12,9 @@
     </div>
 </div>
 <div class="item2">
+    <div class="item2">
+        <p>Servings: {{r.servings}}  Cost Per Serving: {{r.pricePerServing*.01 | currency}}</p>
+        <p>Total Estimated Cost: {{r.pricePerServing*.01*r.servings | currency}}</p>
     <h2>Shopping List:</h2>
     <div *ngFor="let e of comparedRecipes[i].extendedIngredients; index as i" >
        
@@ -20,9 +23,7 @@
     
     </div>
 
-    <p>Cost Per Serving: $ {{r.pricePerServing*.01}}</p>
-    <div class="item2">
-    <p>Servings: {{r.servings}}  Cost Per Serving: {{r.pricePerServing*.01 | currency}}</p>
-    <P>Total Estimated Cost: {{r.pricePerServing*.01*r.servings | currency}}</P>
+    
+    
 
 </div>
